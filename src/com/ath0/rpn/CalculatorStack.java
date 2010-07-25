@@ -148,7 +148,7 @@ public class CalculatorStack implements Serializable {
 	// Implicitly pushes Enter.
 	// Returns error message, or "" if no error.
 	public String divide() {
-		String result = "";
+		String result = null;
 		if (this.stack.size() > 1) {
 			BigDecimal x = this.stack.pop();
 			BigDecimal y = this.stack.pop();

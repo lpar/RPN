@@ -13,7 +13,9 @@ import android.content.Context;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Display;
+import android.view.HapticFeedbackConstants;
 import android.view.KeyEvent;
+import android.view.SoundEffectConstants;
 import android.view.View;
 import android.view.View.OnKeyListener;
 import android.widget.HorizontalScrollView;
@@ -162,6 +164,8 @@ public class Main extends Activity implements OnKeyListener {
     		final char c = key.charAt(0);
     		keyOther(c);
     	}
+    	v.performHapticFeedback(HapticFeedbackConstants.LONG_PRESS,HapticFeedbackConstants.FLAG_IGNORE_GLOBAL_SETTING);
+    	v.playSoundEffect(SoundEffectConstants.CLICK);
     }
 
     /**
