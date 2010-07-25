@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	android:id="@+id/TopLevel"
+    android:orientation="vertical"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    >
+    <HorizontalScrollView 
+    android:id="@+id/Scroll"
+    android:layout_width="fill_parent" 
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="5dp"
+    >
+    <LinearLayout
+    android:id="@+id/ScrollInsides"
+    android:orientation="horizontal"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content">
+		<TextView 
+		android:id="@+id/Display"
+		style="@style/CalculatorDisplay"
+	    android:layout_width="fill_parent" 
+	    android:layout_height="wrap_content" 
+	    android:maxLines="4"
+	    android:cursorVisible="false"
+	    android:gravity="right"
+	    android:layout_gravity="right"
+	    android:text="&#10;&#10;&#10;"
+	    android:scrollHorizontally="false"
+	    />
+	    </LinearLayout>
+    </HorizontalScrollView>
+    <LinearLayout android:id="@+id/row0" android:layout_width="fill_parent"
+		android:layout_height="wrap_content" android:orientation="horizontal"
+		android:layout_weight="1">
+		<Button android:onClick="clickHandler" style="@style/CalculatorButtonStyle" android:layout_height="fill_parent"
+			android:layout_width="0px" android:text="&#x25c8;" android:id="@+id/setdp" android:tag="sdp"
+			android:layout_weight="1" />
+		<Button android:onClick="clickHandler" style="@style/CalculatorButtonStyle" android:layout_height="fill_parent"
+			android:layout_width="0px" android:text="7" android:id="@+id/k7" android:tag="7"
+			android:layout_weight="1" />
+		<Button android:onClick="clickHandler" style="@style/CalculatorButtonStyle" android:layout_height="fill_parent"
+			android:layout_width="0px" android:text="8" android:id="@+id/k8" android:tag="8"
+			android:layout_weight="1" />
+		<Button android:onClick="clickHandler" style="@style/CalculatorButtonStyle" android:layout_height="fill_parent"
+			android:layout_width="0px" android:text="9" android:id="@+id/k9" android:tag="9"
+			android:layout_weight="1" />
+		<Button android:onClick="clickHandler" style="@style/CalculatorButtonStyle" android:layout_height="fill_parent"
+			android:layout_width="0px" android:text="&#x00f7;" android:id="@+id/div" android:tag="/"
+			android:layout_weight="1" />
+	</LinearLayout>
+
+	<LinearLayout android:id="@+id/row1" android:layout_width="fill_parent"
+		android:layout_height="wrap_content" android:orientation="horizontal"
+		android:layout_weight="1">
+		<Button android:onClick="clickHandler" style="@style/CalculatorButtonStyle" android:layout_height="fill_parent"
+			android:layout_width="0px" android:id="@+id/bsp" android:text="&#x2190;" android:tag="bsp"
+			android:layout_weight="1" />
+		<Button android:onClick="clickHandler" style="@style/CalculatorButtonStyle" android:layout_height="fill_parent"
+			android:layout_width="0px" android:text="4" android:id="@+id/k4" android:tag="4"
+			android:layout_weight="1" />
+		<Button android:onClick="clickHandler" style="@style/CalculatorButtonStyle" android:layout_height="fill_parent"
+			android:layout_width="0px" android:text="5" android:id="@+id/k5" android:tag="5"
+			android:layout_weight="1" />
+		<Button android:onClick="clickHandler" style="@style/CalculatorButtonStyle" android:layout_height="fill_parent"
+			android:layout_width="0px" android:text="6" android:id="@+id/k6" android:tag="6"
+			android:layout_weight="1" />
+		<Button android:onClick="clickHandler" style="@style/CalculatorButtonStyle" android:layout_height="fill_parent"
+			android:layout_width="0px" android:text="&#x00d7;" android:id="@+id/mult" android:tag="*"
+			android:layout_weight="1" />
+	</LinearLayout>
+
+	<LinearLayout android:id="@+id/row2" android:layout_width="fill_parent"
+		android:layout_height="wrap_content" android:orientation="horizontal"
+		android:layout_weight="2">
+		<Button android:onClick="clickHandler" style="@style/EnterButtonStyle" android:layout_height="fill_parent"
+			android:layout_width="0px" android:text="E&#x0a;N&#x0a;T&#x0a;E&#x0a;R" android:id="@+id/enter" android:tag="enter"
+			android:layout_weight="1" />
+		<LinearLayout android:id="@+id/column1"
+			android:layout_width="0px" android:layout_height="fill_parent"
+			android:orientation="vertical" android:layout_weight="1">
+			<Button android:onClick="clickHandler" style="@style/CalculatorButtonStyle" android:layout_height="wrap_content"
+				android:id="@+id/k1" android:layout_width="fill_parent"
+				android:text="1" android:tag="1" android:layout_weight="1" />
+			<Button android:onClick="clickHandler" style="@style/CalculatorButtonStyle" android:layout_height="wrap_content"
+				android:layout_width="fill_parent" android:id="@+id/k0"
+				android:text="0" android:tag="0" android:layout_weight="1" />
+		</LinearLayout>
+		<LinearLayout android:id="@+id/column2"
+			android:layout_width="0px" android:layout_height="fill_parent"
+			android:orientation="vertical" android:layout_weight="1">
+			<Button android:onClick="clickHandler" style="@style/CalculatorButtonStyle" android:layout_height="wrap_content"
+				android:id="@+id/k2" android:layout_width="fill_parent"
+				android:text="2" android:tag="2" android:layout_weight="1" />
+			<Button android:onClick="clickHandler" style="@style/CalculatorButtonStyle" android:layout_height="wrap_content"
+				android:id="@+id/point" android:layout_width="fill_parent"
+				android:text="&#x00b7;" android:tag="." android:layout_weight="1" />
+		</LinearLayout>
+		<LinearLayout android:id="@+id/column3"
+			android:layout_width="0px" android:layout_height="fill_parent"
+			android:orientation="vertical" android:layout_weight="1">
+			<Button android:onClick="clickHandler" style="@style/CalculatorButtonStyle" android:layout_height="wrap_content"
+				android:text="3" android:id="@+id/k3" android:tag="3" android:layout_width="fill_parent"
+				android:layout_weight="1" />
+			<Button android:onClick="clickHandler" style="@style/CalculatorButtonStyle" android:layout_height="wrap_content"
+				android:id="@+id/chs" android:tag="chs" android:layout_width="fill_parent"
+				android:text="&#x00b1;" android:layout_weight="1" />
+		</LinearLayout>
+		<LinearLayout android:id="@+id/column4"
+			android:layout_width="0px" android:layout_height="fill_parent"
+			android:orientation="vertical" android:layout_weight="1">
+			<Button android:onClick="clickHandler" style="@style/CalculatorButtonStyle" android:layout_height="wrap_content"
+				android:text="&#x2212;" android:id="@+id/minus" android:tag="-"
+				android:layout_width="fill_parent" android:layout_weight="1" />
+			<Button android:onClick="clickHandler" style="@style/CalculatorButtonStyle" android:layout_height="wrap_content"
+				android:text="&#x002b;" android:id="@+id/plus" android:tag="+" android:layout_width="fill_parent"
+				android:layout_weight="1" />
+		</LinearLayout>
+	</LinearLayout>
+</LinearLayout>

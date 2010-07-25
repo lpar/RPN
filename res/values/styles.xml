@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+	<style name="CalculatorDisplay" parent="@android:style/TextAppearance.Large">
+		<item name="android:background">#a5af91</item>
+		<item name="android:textColor">#000</item>
+		<item name="android:padding">3dp</item>
+	</style>
+		<style name="LandscapeCalculatorDisplay" parent="@android:style/TextAppearance.Medium">
+		<item name="android:background">#a5af91</item>
+		<item name="android:textColor">#000</item>
+		<item name="android:padding">3dp</item>
+	</style>
+	<style name="CalculatorButtonStyle" parent="@android:style/Widget.Button.Small">
+		<item name="android:hapticFeedbackEnabled">true</item>
+		<item name="android:textSize">30sp</item>
+		<item name="android:focusable">true</item>
+	</style>
+		<style name="LandscapeCalculatorButtonStyle" parent="@android:style/Widget.Button.Small">
+		<item name="android:hapticFeedbackEnabled">true</item>
+		<item name="android:textSize">20sp</item>
+		<item name="android:focusable">true</item>
+	</style>
+	<style name="EnterButtonStyle" parent="CalculatorButtonStyle">
+	<item name="android:textSize">15sp</item>
+	</style>
+	<style name="LandscapeEnterButtonStyle" parent="CalculatorButtonStyle">
+	<item name="android:textSize">15sp</item>
+	</style>
+
+</resources>
