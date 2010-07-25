@@ -29,6 +29,7 @@ public class Main extends Activity implements OnKeyListener {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        Eula.show(this);
         setContentView(R.layout.main);
     	Display display = getWindowManager().getDefaultDisplay(); 
     	int width = display.getWidth();
