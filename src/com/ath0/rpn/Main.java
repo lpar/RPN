@@ -11,6 +11,7 @@ import java.io.ObjectOutputStream;
 import android.app.Activity;
 import android.content.Context;
 import android.os.Bundle;
+import android.text.ClipboardManager;
 import android.util.Log;
 import android.view.Display;
 import android.view.HapticFeedbackConstants;
@@ -201,7 +202,7 @@ public class Main extends Activity implements OnKeyListener {
     	super.onPause();
     	saveState();
     }
-    
+        
     /**
      * Save state to internal cache.
      */
