@@ -56,6 +56,13 @@ public class Main extends Activity implements OnKeyListener {
     		if (this.stack.isEmpty()) {
     			// Display zero rather than a totally empty display
     			text = new StringBuilder("\n\n\n0");
+    			int sc = this.stack.getScale();
+    			if (sc > 0) {
+    				text.append('.');
+    				for (int i = 0; i < sc; i++) {
+    					text.append('0');
+    				}
+    			}
     		} else {
     			text = this.stack.toString(4);
     		}
@@ -87,7 +94,11 @@ public class Main extends Activity implements OnKeyListener {
     }
      
     private void keyDelete() {
-    	this.buffer.delete();
+    	if (this.buffer.isEmpty()) {
+    		this.stack.drop();
+    	} else {
+    		this.buffer.delete();	
+    	}
 		this.updateDisplay();
     }
     
@@ -165,7 +176,7 @@ public class Main extends Activity implements OnKeyListener {
     		final char c = key.charAt(0);
     		keyOther(c);
     	}
-    	v.performHapticFeedback(HapticFeedbackConstants.LONG_PRESS,HapticFeedbackConstants.FLAG_IGNORE_GLOBAL_SETTING);
+    	v.performHapticFeedback(HapticFeedbackConstants.KEYBOARD_TAP,HapticFeedbackConstants.FLAG_IGNORE_GLOBAL_SETTING);
     	v.playSoundEffect(SoundEffectConstants.CLICK);
     }
 

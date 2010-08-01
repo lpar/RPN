@@ -11,7 +11,6 @@ public class InputBuffer implements Serializable {
 	
 	private static final int INITIAL_CAPACITY = 32;
 	private final StringBuilder buffer = new StringBuilder(INITIAL_CAPACITY);
-	private boolean dot = false;
 
 	public InputBuffer(String value) {
 		super();
@@ -30,12 +29,11 @@ public class InputBuffer implements Serializable {
 	public void append(char c) {
 		switch (c) {
 		case '.':
-			if (!this.dot) {
+			if (this.buffer.indexOf(".") == -1) {
 				if (this.buffer.length() == 0) {
 					this.buffer.append('0');
 				}
 				this.buffer.append('.');
-				this.dot = true;
 			}
 			break;
 		case '0':

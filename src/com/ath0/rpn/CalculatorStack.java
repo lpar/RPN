@@ -180,6 +180,8 @@ public class CalculatorStack implements Serializable {
 		}
 	}
 
-	
+	public int getScale() {
+		return this.scale;
+	}
 	
 }
