@@ -1,6 +1,5 @@
 package com.ath0.rpn;
 
-import android.app.Application;
 import android.content.Context;
 import android.text.ClipboardManager;
 import android.util.AttributeSet;

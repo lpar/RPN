@@ -23,7 +23,7 @@ public class CalculatorStack implements Serializable {
 
 	private final Stack<BigDecimal> stack;
 
-	private int scale = 0;
+	private int scale = 2;
 
 	public CalculatorStack() {
 		super();

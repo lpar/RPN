@@ -11,7 +11,6 @@ import java.io.ObjectOutputStream;
 import android.app.Activity;
 import android.content.Context;
 import android.os.Bundle;
-import android.text.ClipboardManager;
 import android.util.Log;
 import android.view.Display;
 import android.view.HapticFeedbackConstants;
@@ -36,7 +35,7 @@ public class Main extends Activity implements OnKeyListener {
         setContentView(R.layout.main);
     	Display display = getWindowManager().getDefaultDisplay(); 
     	int width = display.getWidth();
-    	Log.i("onCreate",Integer.toString(width));
+  //  	Log.i("onCreate",Integer.toString(width));
         final TextView t = (TextView) findViewById(R.id.Display);
         t.setMinWidth(width);
         t.setFocusable(true);
@@ -113,35 +112,41 @@ public class Main extends Activity implements OnKeyListener {
 		this.updateDisplay();
     }
     
-    private void keyOther(char c) {
+    private boolean keyOther(char c) {
+    	boolean handled = false;
     	switch (c) {
 		case '+':
 			implicitPush();
 			this.stack.add();
 			this.updateDisplay();
+			handled = true;
 			break;
 		case '-':
 			implicitPush();
 			this.stack.subtract();
 			this.updateDisplay();
+			handled = true;
 			break;
 		case '*':
 			implicitPush();
 			this.stack.multiply();
 			this.updateDisplay();
+			handled = true;
 			break;
 		case '/':
 			implicitPush();
 			this.error = this.stack.divide();
 			this.updateDisplay();
+			handled = true;
 			break;
 		default:
 			if ((c >= '0' && c <= '9') || c == '.') {
 				this.buffer.append(c);
 				this.updateDisplay();
+				handled = true;
 			}
-			break;
 		}
+    	return handled;
     }
     
     private void scrollToRight() {
@@ -200,8 +205,7 @@ public class Main extends Activity implements OnKeyListener {
     			}
     			// OK, must be a number or some other operation
     			final char c = (char) event.getUnicodeChar();
-    			keyOther(c);
-    			result = true;
+    			result = keyOther(c);
     			break handler;
     		}
     	}
@@ -248,7 +252,7 @@ public class Main extends Activity implements OnKeyListener {
     		this.buffer = (InputBuffer) in.readObject();
     		in.close();
     	} catch (FileNotFoundException ex) {
-    		Log.i("loadState","No state file found, instantiating empty state"); 
+    	//	Log.i("loadState","No state file found, instantiating empty state"); 
     		this.buffer = new InputBuffer();
     		this.stack = new CalculatorStack();
     	} catch (IOException ex) {
