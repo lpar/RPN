@@ -5,26 +5,73 @@
 		<item name="android:textColor">#000</item>
 		<item name="android:padding">3dp</item>
 	</style>
-		<style name="LandscapeCalculatorDisplay" parent="@android:style/TextAppearance.Medium">
+	<style name="LandscapeCalculatorDisplay" parent="@android:style/TextAppearance.Small">
 		<item name="android:background">#a5af91</item>
 		<item name="android:textColor">#000</item>
 		<item name="android:padding">3dp</item>
 	</style>
-	<style name="CalculatorButtonStyle" parent="@android:style/Widget.Button.Small">
+	
+	<style name="CalculatorButtonStyle" parent="@android:style/Widget.Button">
 		<item name="android:hapticFeedbackEnabled">true</item>
 		<item name="android:textSize">30sp</item>
 		<item name="android:focusable">true</item>
+		<item name="android:layout_width">64dp</item>
+		<item name="android:layout_height">80dp</item>
 	</style>
-		<style name="LandscapeCalculatorButtonStyle" parent="@android:style/Widget.Button.Small">
+	<style name="LandscapeCalculatorButtonStyle" parent="@android:style/Widget.Button.Small">
 		<item name="android:hapticFeedbackEnabled">true</item>
 		<item name="android:textSize">20sp</item>
 		<item name="android:focusable">true</item>
+		<item name="android:layout_width">80dp</item>
+		<item name="android:layout_height">37dp</item>
 	</style>
+	
 	<style name="EnterButtonStyle" parent="CalculatorButtonStyle">
-	<item name="android:textSize">15sp</item>
+		<item name="android:textSize">15sp</item>
+	 	<item name="android:layout_width">64dp</item>
+		<item name="android:layout_height">160dp</item>
 	</style>
-	<style name="LandscapeEnterButtonStyle" parent="CalculatorButtonStyle">
-	<item name="android:textSize">15sp</item>
+	<style name="LandscapeEnterButtonStyle" parent="LandscapeCalculatorButtonStyle">
+		<item name="android:textSize">15sp</item>
+		<item name="android:layout_width">80dp</item>
+		<item name="android:layout_height">74dp</item>
+	</style>
+
+	<style name="CalculatorTextButtonStyle" parent="@android:style/Widget.Button">
+		<item name="android:hapticFeedbackEnabled">true</item>
+		<item name="android:textSize">14sp</item>
+		<item name="android:focusable">true</item>
+		<item name="android:layout_width">64dp</item>
+		<item name="android:layout_height">80dp</item>
+	</style>
+	<style name="LandscapeCalculatorTextButtonStyle" parent="@android:style/Widget.Button">
+		<item name="android:hapticFeedbackEnabled">true</item>
+		<item name="android:textSize">14sp</item>
+		<item name="android:focusable">true</item>
+		<item name="android:layout_width">80dp</item>
+		<item name="android:layout_height">37dp</item>
+	</style>
+
+	
+	<style name="ShiftButtonStyle" parent="@android:style/Widget.Button">
+		<item name="android:hapticFeedbackEnabled">true</item>
+		<item name="android:textSize">20sp</item>
+		<item name="android:focusable">true</item>
+		<item name="android:layout_width">64dp</item>
+		<item name="android:layout_height">80dp</item>
+	</style>
+	<style name="LandscapeShiftButtonStyle" parent="@android:style/Widget.Button">
+		<item name="android:hapticFeedbackEnabled">true</item>
+		<item name="android:textSize">13sp</item>
+		<item name="android:focusable">true</item>
+		<item name="android:layout_width">80dp</item>
+		<item name="android:layout_height">37dp</item>
+	</style>
+	
+	<style name="MissingButtonStyle" parent="@android:style/Widget.Button">
+		<item name="android:hapticFeedbackEnabled">false</item>
+		<item name="android:background">#000</item>
+		<item name="android:focusable">false</item>
 	</style>
 
 </resources>

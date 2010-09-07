@@ -111,8 +111,17 @@ public class CalculatorStack implements Serializable {
 		}
 	}
 	
+	// Swap top two elements
+	public void swap() {
+		if (this.stack.size() > 1) {
+			BigDecimal x = this.stack.pop();
+			BigDecimal y = this.stack.pop();
+			this.stack.push(x);
+			this.stack.push(y);
+		}
+	}
+	
 	// Add top two elements.
-	// Implicitly pushes Enter.
 	public void add() {
 		if (this.stack.size() > 1) {
 			BigDecimal x = this.stack.pop();
@@ -123,7 +132,6 @@ public class CalculatorStack implements Serializable {
 	}
 	
 	// Add top two elements.
-	// Implicitly pushes Enter.
 	public void subtract() {
 		if (this.stack.size() > 1) {
 			BigDecimal x = this.stack.pop();
@@ -134,7 +142,6 @@ public class CalculatorStack implements Serializable {
 	}
 	
 	// Add top two elements.
-	// Implicitly pushes Enter.
 	public void multiply() {
 		if (this.stack.size() > 1) {
 			BigDecimal x = this.stack.pop();
@@ -144,9 +151,22 @@ public class CalculatorStack implements Serializable {
 		}
 	}
 	
-	// Add top two elements.
-	// Implicitly pushes Enter.
-	// Returns error message, or "" if no error.
+	// Raise to power.
+	// Returns error message, or null if no error.
+	public String power() {
+		String result = null;
+		if (this.stack.size() > 1) {
+			BigDecimal y = this.stack.pop();
+			BigDecimal x = this.stack.pop();
+			int yi = y.intValueExact();
+			BigDecimal r = x.pow(yi);
+			this.stack.push(r);
+		}
+		return result;
+	}
+	
+	// Divide top two elements.
+	// Returns error message, or null if no error.
 	public String divide() {
 		String result = null;
 		if (this.stack.size() > 1) {
@@ -164,6 +184,16 @@ public class CalculatorStack implements Serializable {
 			}
 		}
 		return result;
+	}
+	
+	// Reciprocal of top element
+	public void reciprocal() {
+		if (!this.stack.isEmpty()) {
+			BigDecimal x = this.stack.peek();
+			BigDecimal one = new BigDecimal(1);
+			BigDecimal y = one.divide(x, INTERNAL_SCALE, RoundingMode.HALF_EVEN);
+			this.stack.push(y);
+		}
 	}
 	
 	public void setScale(final int newscale) {
