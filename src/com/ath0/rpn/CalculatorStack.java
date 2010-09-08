@@ -187,13 +187,20 @@ public class CalculatorStack implements Serializable {
 	}
 	
 	// Reciprocal of top element
-	public void reciprocal() {
+	public String reciprocal() {
+		String result = null;
 		if (!this.stack.isEmpty()) {
 			BigDecimal x = this.stack.peek();
 			BigDecimal one = new BigDecimal(1);
+			try {
 			BigDecimal y = one.divide(x, INTERNAL_SCALE, RoundingMode.HALF_EVEN);
 			this.stack.push(y);
+			} catch (ArithmeticException e) {
+				result = e.getMessage();
+				//			Log.i("divide", "Error: " + e.getMessage());
+			}
 		}
+		return result;
 	}
 	
 	public void setScale(final int newscale) {

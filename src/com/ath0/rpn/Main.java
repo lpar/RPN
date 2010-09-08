@@ -221,7 +221,7 @@ public class Main extends Activity implements OnKeyListener {
     		updateDisplay();
     	} else if ("1/x".equals(key)) {
     		implicitPush();
-    		this.stack.reciprocal();
+    		this.error = this.stack.reciprocal();
     		updateDisplay();
     	}
     	this.shiftHandler(v);

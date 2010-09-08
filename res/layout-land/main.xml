@@ -100,7 +100,7 @@
 				android:text="1/x" android:id="@+id/recip" android:tag="1/x"
 				android:layout_toRightOf="@+id/blank1" />
 			<Button android:onClick="shiftClickHandler" style="@style/LandscapeCalculatorTextButtonStyle"
-				android:text="**" android:id="@+id/power" android:tag="pow"
+				android:text="x&#x207f;" android:id="@+id/power" android:tag="pow"
 				android:layout_below="@+id/recip" android:layout_toRightOf="@+id/blank1" />
 			<Button style="@style/MissingButtonStyle" android:id="@+id/blank2"
 				android:layout_width="160dp" android:layout_height="40dp"

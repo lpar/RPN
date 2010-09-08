@@ -25,8 +25,7 @@
 		<RelativeLayout android:id="@+id/Keyboard0"
 			android:layout_width="wrap_content" android:layout_height="wrap_content">
 
-			<Button android:onClick="shiftHandler" style="@style/ShiftButtonStyle"
-				android:layout_width="64dp" android:layout_height="80dp" android:id="@+id/shift"
+			<Button android:onClick="shiftHandler" style="@style/ShiftButtonStyle" android:id="@+id/shift"
 				android:tag="shift" android:text="&#x21e7;" />
 			<Button android:onClick="clickHandler" style="@style/CalculatorButtonStyle"
 				android:text="7" android:id="@+id/k7" android:tag="7"
@@ -103,7 +102,7 @@
 				android:text="1/x" android:id="@+id/recip" android:tag="1/x"
 				android:layout_toRightOf="@+id/blank1" />
 			<Button android:onClick="shiftClickHandler" style="@style/CalculatorTextButtonStyle"
-				android:text="**" android:id="@+id/power" android:tag="pow"
+				android:text="x&#x207f;" android:id="@+id/power" android:tag="pow"
 				android:layout_below="@+id/recip" android:layout_toRightOf="@+id/blank1" />
 			<Button style="@style/MissingButtonStyle" android:id="@+id/blank2"
 				android:layout_width="128dp" android:layout_height="80dp"
