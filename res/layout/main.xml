@@ -29,60 +29,60 @@
 				android:tag="shift" android:text="&#x21e7;" />
 			<Button android:onClick="clickHandler" style="@style/CalculatorButtonStyle"
 				android:text="7" android:id="@+id/k7" android:tag="7"
-				android:layout_toRightOf="@+id/shift" />
+				android:layout_toRightOf="@id/shift" />
 			<Button android:onClick="clickHandler" style="@style/CalculatorButtonStyle"
 				android:text="8" android:id="@+id/k8" android:tag="8"
-				android:layout_toRightOf="@+id/k7" />
+				android:layout_toRightOf="@id/k7" />
 			<Button android:onClick="clickHandler" style="@style/CalculatorButtonStyle"
 				android:text="9" android:id="@+id/k9" android:tag="9"
-				android:layout_toRightOf="@+id/k8" />
+				android:layout_toRightOf="@id/k8" />
 			<Button android:onClick="clickHandler" style="@style/CalculatorButtonStyle"
 				android:text="&#x00f7;" android:id="@+id/div" android:tag="/"
-				android:layout_toRightOf="@+id/k9" />
+				android:layout_toRightOf="@id/k9" />
 			<Button android:onClick="clickHandler" style="@style/CalculatorButtonStyle"
 				android:text="&#x2190;" android:id="@+id/bsp" android:tag="bsp" 
-				android:layout_below="@+id/shift" />
+				android:layout_below="@id/shift" />
 			<Button android:onClick="clickHandler" style="@style/CalculatorButtonStyle"
 				android:text="4" android:id="@+id/k4" android:tag="4"
-				android:layout_below="@+id/k7" android:layout_toRightOf="@+id/bsp" />
+				android:layout_below="@id/k7" android:layout_toRightOf="@id/bsp" />
 			<Button android:onClick="clickHandler" style="@style/CalculatorButtonStyle"
 				android:text="5" android:id="@+id/k5" android:tag="5"
-				android:layout_below="@+id/k8" android:layout_toRightOf="@+id/k4" />
+				android:layout_below="@id/k8" android:layout_toRightOf="@id/k4" />
 			<Button android:onClick="clickHandler" style="@style/CalculatorButtonStyle"
 				android:text="6" android:id="@+id/k6" android:tag="6"
-				android:layout_below="@+id/k9" android:layout_toRightOf="@+id/k5" />
+				android:layout_below="@id/k9" android:layout_toRightOf="@id/k5" />
 			<Button android:onClick="clickHandler" style="@style/CalculatorButtonStyle"
 				android:text="&#x00d7;" android:id="@+id/mult" android:tag="*"
-				android:layout_below="@+id/div" android:layout_toRightOf="@+id/k6" />
+				android:layout_below="@id/div" android:layout_toRightOf="@id/k6" />
 			<Button android:onClick="clickHandler" style="@style/EnterButtonStyle"
 				android:text="E&#x0a;N&#x0a;T&#x0a;E&#x0a;R" android:id="@+id/enter"
-				android:tag="enter" android:layout_below="@+id/bsp" />
+				android:tag="enter" android:layout_below="@id/bsp" />
 			<Button android:onClick="clickHandler" style="@style/CalculatorButtonStyle"
-				android:text="1" android:id="@+id/k1" android:tag="1" android:layout_below="@+id/k4"
-				android:layout_toRightOf="@+id/enter" />
+				android:text="1" android:id="@+id/k1" android:tag="1" android:layout_below="@id/k4"
+				android:layout_toRightOf="@id/enter" />
 			<Button android:onClick="clickHandler" style="@style/CalculatorButtonStyle"
 				android:text="2" android:id="@+id/k2" android:tag="2"
-				android:layout_below="@+id/k5" android:layout_toRightOf="@+id/k1" />
+				android:layout_below="@id/k5" android:layout_toRightOf="@id/k1" />
 			<Button android:onClick="clickHandler" style="@style/CalculatorButtonStyle"
 				android:text="3" android:id="@+id/k3" android:tag="3"
-				android:layout_below="@+id/k6" android:layout_toRightOf="@+id/k2" />
+				android:layout_below="@id/k6" android:layout_toRightOf="@id/k2" />
 			<Button android:onClick="clickHandler" style="@style/CalculatorButtonStyle"
 				android:text="0" android:id="@+id/k0"
-				android:tag="0" android:layout_below="@+id/k1"
-				android:layout_toRightOf="@+id/enter" />
+				android:tag="0" android:layout_below="@id/k1"
+				android:layout_toRightOf="@id/enter" />
 			<Button android:onClick="clickHandler" style="@style/CalculatorButtonStyle"
 				android:id="@+id/point" android:text="&#x00b7;"
-				android:tag="." android:layout_below="@+id/k2"
-				android:layout_toRightOf="@+id/k0" />
+				android:tag="." android:layout_below="@id/k2"
+				android:layout_toRightOf="@id/k0" />
 			<Button android:onClick="clickHandler" style="@style/CalculatorButtonStyle"
 				android:id="@+id/chs" android:tag="chs" android:text="&#x00b1;"
-				android:layout_below="@+id/k3" android:layout_toRightOf="@+id/point" />
+				android:layout_below="@id/k3" android:layout_toRightOf="@id/point" />
 			<Button android:onClick="clickHandler" style="@style/CalculatorButtonStyle"
 				android:text="&#x2212;" android:id="@+id/minus" android:tag="-"
-				android:layout_below="@+id/mult" android:layout_toRightOf="@+id/k3" />
+				android:layout_below="@id/mult" android:layout_toRightOf="@id/k3" />
 			<Button android:onClick="clickHandler" style="@style/CalculatorButtonStyle"
 				android:text="&#x002b;" android:id="@+id/plus" android:tag="+"
-				android:layout_below="@+id/minus" android:layout_toRightOf="@+id/chs" />
+				android:layout_below="@id/minus" android:layout_toRightOf="@id/chs" />
 		</RelativeLayout>
 
 		<RelativeLayout android:id="@+id/Keyboard1"
