@@ -158,9 +158,13 @@ public class CalculatorStack implements Serializable {
 		if (this.stack.size() > 1) {
 			BigDecimal y = this.stack.pop();
 			BigDecimal x = this.stack.pop();
-			int yi = y.intValueExact();
-			BigDecimal r = x.pow(yi);
-			this.stack.push(r);
+			try {
+				int yi = y.intValueExact();
+				BigDecimal r = x.pow(yi);
+				this.stack.push(r);
+			} catch (ArithmeticException e) {
+				result = "Value out of range";
+			}
 		}
 		return result;
 	}
