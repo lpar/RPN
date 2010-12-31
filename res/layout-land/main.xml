@@ -93,21 +93,25 @@
 			<Button android:onClick="shiftClickHandler" style="@style/LandscapeCalculatorTextButtonStyle"
 				android:id="@+id/swap" android:tag="swap" android:text="&#x21c5;"
 				android:layout_below="@+id/drop" />
-			<Button style="@style/MissingButtonStyle" android:id="@+id/blank1"
-				android:layout_width="240dp" android:layout_height="40dp"
+			<Button style="@style/LandscapeMissingButtonStyle" android:id="@+id/blank1"
 				android:layout_toRightOf="@+id/unshift" />
+			<Button style="@style/LandscapeMissingButtonStyle" android:id="@+id/blank2"
+				android:layout_toRightOf="@+id/blank1" />
+			<Button style="@style/LandscapeMissingButtonStyle" android:id="@+id/blank3"
+				android:layout_toRightOf="@+id/blank2" />
 			<Button android:onClick="shiftClickHandler" style="@style/LandscapeCalculatorTextButtonStyle"
 				android:text="1/x" android:id="@+id/recip" android:tag="1/x"
-				android:layout_toRightOf="@+id/blank1" />
+				android:layout_toRightOf="@+id/blank3" />
 			<Button android:onClick="shiftClickHandler" style="@style/LandscapeCalculatorTextButtonStyle"
 				android:text="x&#x207f;" android:id="@+id/power" android:tag="pow"
-				android:layout_below="@+id/recip" android:layout_toRightOf="@+id/blank1" />
-			<Button style="@style/MissingButtonStyle" android:id="@+id/blank2"
-				android:layout_width="160dp" android:layout_height="40dp"
+				android:layout_below="@+id/recip" android:layout_toRightOf="@+id/blank3" />
+			<Button style="@style/LandscapeMissingButtonStyle" android:id="@+id/blank4"
 				android:layout_below="@+id/swap" />
+			<Button style="@style/LandscapeMissingButtonStyle" android:id="@+id/blank5"
+				android:layout_below="@+id/swap" android:layout_toRightOf="@+id/blank4"/>
 			<Button android:onClick="shiftClickHandler" style="@style/LandscapeCalculatorTextButtonStyle"
 				android:id="@+id/setdp" android:tag="sdp" android:text="SET DP"
-				android:layout_below="@+id/swap" android:layout_toRightOf="@+id/blank2" />
+				android:layout_below="@+id/swap" android:layout_toRightOf="@+id/blank5" />
 		</RelativeLayout>
 
 	</ViewAnimator>

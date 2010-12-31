@@ -16,7 +16,7 @@
 		<item name="android:textSize">30sp</item>
 		<item name="android:focusable">true</item>
 		<item name="android:layout_width">64dp</item>
-		<item name="android:layout_height">78dp</item>
+		<item name="android:layout_height">64dp</item>
 	</style>
 	<style name="LandscapeCalculatorButtonStyle" parent="@android:style/Widget.Button.Small">
 		<item name="android:hapticFeedbackEnabled">true</item>
@@ -29,7 +29,7 @@
 	<style name="EnterButtonStyle" parent="CalculatorButtonStyle">
 		<item name="android:textSize">15sp</item>
 	 	<item name="android:layout_width">64dp</item>
-		<item name="android:layout_height">156dp</item>
+		<item name="android:layout_height">128dp</item>
 	</style>
 	<style name="LandscapeEnterButtonStyle" parent="LandscapeCalculatorButtonStyle">
 		<item name="android:textSize">15sp</item>
@@ -42,7 +42,7 @@
 		<item name="android:textSize">14sp</item>
 		<item name="android:focusable">true</item>
 		<item name="android:layout_width">64dp</item>
-		<item name="android:layout_height">78dp</item>
+		<item name="android:layout_height">64dp</item>
 	</style>
 	<style name="LandscapeCalculatorTextButtonStyle" parent="@android:style/Widget.Button">
 		<item name="android:hapticFeedbackEnabled">true</item>
@@ -58,7 +58,7 @@
 		<item name="android:textSize">20sp</item>
 		<item name="android:focusable">true</item>
 		<item name="android:layout_width">64dp</item>
-		<item name="android:layout_height">78dp</item>
+		<item name="android:layout_height">64dp</item>
 	</style>
 	<style name="LandscapeShiftButtonStyle" parent="@android:style/Widget.Button">
 		<item name="android:hapticFeedbackEnabled">true</item>
@@ -73,15 +73,15 @@
 		<item name="android:background">#00000000</item>
 		<item name="android:focusable">false</item>
 		<item name="android:layout_width">64dp</item>
-		<item name="android:layout_height">78dp</item>
+		<item name="android:layout_height">64dp</item>
 	</style>
-		<style name="LandscapeMissingButtonStyle" parent="@android:style/Widget.Button">
+	<style name="LandscapeMissingButtonStyle" parent="@android:style/Widget.Button">
 		<item name="android:hapticFeedbackEnabled">false</item>
 		<item name="android:background">#00000000</item>
 		<item name="android:focusable">false</item>
 		<item name="android:layout_width">80dp</item>
 		<item name="android:layout_height">37dp</item>
 	</style>
-	
+
 
 </resources>
