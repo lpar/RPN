@@ -36,10 +36,11 @@ public class Main extends Activity implements OnKeyListener {
         super.onCreate(savedInstanceState);
         Eula.show(this);
         setContentView(R.layout.main);
-    	Display display = getWindowManager().getDefaultDisplay(); 
-    	int width = display.getWidth();
+        // Request that the main view be laid out
   //  	Log.i("onCreate",Integer.toString(width));
         final TextView t = (TextView) findViewById(R.id.Display);
+    	Display display = getWindowManager().getDefaultDisplay(); 
+    	int width = display.getWidth();
         t.setMinWidth(width);
         t.setFocusable(true);
         t.setFocusableInTouchMode(true);
@@ -53,7 +54,7 @@ public class Main extends Activity implements OnKeyListener {
         unshift.getBackground().setColorFilter(0xFFFF7F00, PorterDuff.Mode.MULTIPLY);
         updateDisplay();
     }
-    
+       
     /**
      * Update the 4-level stack.
      */

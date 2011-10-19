@@ -22,7 +22,7 @@
 		android:layout_width="fill_parent" android:layout_height="fill_parent">
 
 		<!-- Regular keyboard -->
-		<RelativeLayout android:id="@+id/Keyboard0"
+		<com.ath0.rpn.KeypadLayout android:id="@+id/Keyboard0"
 			android:layout_width="wrap_content" android:layout_height="wrap_content">
 
 			<Button android:onClick="shiftHandler" style="@style/ShiftButtonStyle" android:id="@+id/shift"
@@ -83,9 +83,9 @@
 			<Button android:onClick="clickHandler" style="@style/CalculatorButtonStyle"
 				android:text="&#x002b;" android:id="@+id/plus" android:tag="+"
 				android:layout_below="@id/minus" android:layout_toRightOf="@id/chs" />
-		</RelativeLayout>
+		</com.ath0.rpn.KeypadLayout>
 
-		<RelativeLayout android:id="@+id/Keyboard1"
+		<com.ath0.rpn.KeypadLayout android:id="@+id/Keyboard1"
 			android:layout_width="wrap_content" android:layout_height="wrap_content">
 			<Button android:onClick="shiftHandler" style="@style/ShiftButtonStyle"
 				android:id="@+id/unshift" android:tag="shift" android:text="&#x21e9;" />
@@ -115,7 +115,7 @@
 				android:id="@+id/setdp" android:tag="sdp" android:text="SET DP"
 				android:layout_below="@+id/swap" android:layout_toRightOf="@+id/blank5" />
 
-		</RelativeLayout>
+		</com.ath0.rpn.KeypadLayout>
 
 	</ViewAnimator>
 
