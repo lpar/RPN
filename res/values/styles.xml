@@ -20,7 +20,7 @@
 	</style>
 	<style name="LandscapeCalculatorButtonStyle" parent="@android:style/Widget.Button.Small">
 		<item name="android:hapticFeedbackEnabled">true</item>
-		<item name="android:textSize">20sp</item>
+		<item name="android:textSize">15sp</item>
 		<item name="android:focusable">true</item>
 		<item name="android:layout_width">80dp</item>
 		<item name="android:layout_height">37dp</item>

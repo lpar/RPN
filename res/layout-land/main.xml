@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	android:id="@+id/TopLevel" android:orientation="vertical"
+	android:layout_width="fill_parent" android:layout_height="fill_parent">
+
+	<HorizontalScrollView android:id="@+id/Scroll"
+		android:layout_width="fill_parent" android:layout_height="wrap_content"
+		android:layout_marginBottom="5dp">
+		<LinearLayout android:id="@+id/ScrollInsides"
+			android:orientation="horizontal" android:layout_width="fill_parent"
+			android:layout_height="fill_parent">
+			<com.ath0.rpn.StackView android:id="@+id/Display"
+				style="@style/CalculatorDisplay" android:layout_width="fill_parent"
+				android:layout_height="wrap_content" android:maxLines="2"
+				android:cursorVisible="false" android:gravity="bottom|right"
+				android:layout_gravity="bottom|right|clip_vertical" android:text="&#10;&#10;&#10;"
+				android:scrollHorizontally="false" android:editable="false" />
+		</LinearLayout>
+	</HorizontalScrollView>
+
+	<ViewAnimator android:id="@+id/KeyboardAnimator"
+		android:layout_width="fill_parent" android:layout_height="fill_parent">
+
+		<!-- Regular keyboard -->
+		<com.ath0.rpn.KeypadLayout android:id="@+id/Keyboard0"
+			android:layout_width="wrap_content" android:layout_height="wrap_content">
+
+			<Button android:onClick="shiftHandler" style="@style/ShiftButtonStyle" android:id="@+id/shift"
+				android:tag="shift" android:text="&#x21e7;" />
+			<Button android:onClick="clickHandler" style="@style/CalculatorButtonStyle"
+				android:text="7" android:id="@+id/k7" android:tag="7"
+				android:layout_toRightOf="@id/shift" />
+			<Button android:onClick="clickHandler" style="@style/CalculatorButtonStyle"
+				android:text="8" android:id="@+id/k8" android:tag="8"
+				android:layout_toRightOf="@id/k7" />
+			<Button android:onClick="clickHandler" style="@style/CalculatorButtonStyle"
+				android:text="9" android:id="@+id/k9" android:tag="9"
+				android:layout_toRightOf="@id/k8" />
+			<Button android:onClick="clickHandler" style="@style/CalculatorButtonStyle"
+				android:text="&#x00f7;" android:id="@+id/div" android:tag="/"
+				android:layout_toRightOf="@id/k9" />
+			<Button android:onClick="clickHandler" style="@style/CalculatorButtonStyle"
+				android:text="&#x2190;" android:id="@+id/bsp" android:tag="bsp" 
+				android:layout_below="@id/shift" />
+			<Button android:onClick="clickHandler" style="@style/CalculatorButtonStyle"
+				android:text="4" android:id="@+id/k4" android:tag="4"
+				android:layout_below="@id/k7" android:layout_toRightOf="@id/bsp" />
+			<Button android:onClick="clickHandler" style="@style/CalculatorButtonStyle"
+				android:text="5" android:id="@+id/k5" android:tag="5"
+				android:layout_below="@id/k8" android:layout_toRightOf="@id/k4" />
+			<Button android:onClick="clickHandler" style="@style/CalculatorButtonStyle"
+				android:text="6" android:id="@+id/k6" android:tag="6"
+				android:layout_below="@id/k9" android:layout_toRightOf="@id/k5" />
+			<Button android:onClick="clickHandler" style="@style/CalculatorButtonStyle"
+				android:text="&#x00d7;" android:id="@+id/mult" android:tag="*"
+				android:layout_below="@id/div" android:layout_toRightOf="@id/k6" />
+			<Button android:onClick="clickHandler" style="@style/EnterButtonStyle"
+				android:text="E&#x0a;N&#x0a;T&#x0a;E&#x0a;R" android:id="@+id/enter"
+				android:tag="enter" android:layout_below="@id/bsp" />
+			<Button android:onClick="clickHandler" style="@style/CalculatorButtonStyle"
+				android:text="1" android:id="@+id/k1" android:tag="1" android:layout_below="@id/k4"
+				android:layout_toRightOf="@id/enter" />
+			<Button android:onClick="clickHandler" style="@style/CalculatorButtonStyle"
+				android:text="2" android:id="@+id/k2" android:tag="2"
+				android:layout_below="@id/k5" android:layout_toRightOf="@id/k1" />
+			<Button android:onClick="clickHandler" style="@style/CalculatorButtonStyle"
+				android:text="3" android:id="@+id/k3" android:tag="3"
+				android:layout_below="@id/k6" android:layout_toRightOf="@id/k2" />
+			<Button android:onClick="clickHandler" style="@style/CalculatorButtonStyle"
+				android:text="0" android:id="@+id/k0"
+				android:tag="0" android:layout_below="@id/k1"
+				android:layout_toRightOf="@id/enter" />
+			<Button android:onClick="clickHandler" style="@style/CalculatorButtonStyle"
+				android:id="@+id/point" android:text="&#x00b7;"
+				android:tag="." android:layout_below="@id/k2"
+				android:layout_toRightOf="@id/k0" />
+			<Button android:onClick="clickHandler" style="@style/CalculatorButtonStyle"
+				android:id="@+id/chs" android:tag="chs" android:text="&#x00b1;"
+				android:layout_below="@id/k3" android:layout_toRightOf="@id/point" />
+			<Button android:onClick="clickHandler" style="@style/CalculatorButtonStyle"
+				android:text="&#x2212;" android:id="@+id/minus" android:tag="-"
+				android:layout_below="@id/mult" android:layout_toRightOf="@id/k3" />
+			<Button android:onClick="clickHandler" style="@style/CalculatorButtonStyle"
+				android:text="&#x002b;" android:id="@+id/plus" android:tag="+"
+				android:layout_below="@id/minus" android:layout_toRightOf="@id/chs" />
+		</com.ath0.rpn.KeypadLayout>
+
+		<com.ath0.rpn.KeypadLayout android:id="@+id/Keyboard1"
+			android:layout_width="wrap_content" android:layout_height="wrap_content">
+			<Button android:onClick="shiftHandler" style="@style/ShiftButtonStyle"
+				android:id="@+id/unshift" android:tag="shift" android:text="&#x21e9;" />
+			<Button android:onClick="shiftClickHandler" style="@style/CalculatorTextButtonStyle"
+				android:id="@+id/drop" android:tag="drop" android:text="DROP"
+				android:layout_below="@+id/unshift" />
+			<Button android:onClick="shiftClickHandler" style="@style/CalculatorTextButtonStyle"
+				android:id="@+id/swap" android:tag="swap" android:text="&#x21c5;"
+				android:layout_below="@+id/drop" />
+			<Button style="@style/MissingButtonStyle" android:id="@+id/blank1"
+				android:layout_toRightOf="@+id/unshift"/>
+			<Button style="@style/MissingButtonStyle" android:id="@+id/blank2"
+				android:layout_toRightOf="@+id/blank1"/>
+			<Button style="@style/MissingButtonStyle" android:id="@+id/blank3"
+				android:layout_toRightOf="@+id/blank2"/>
+			<Button android:onClick="shiftClickHandler" style="@style/CalculatorTextButtonStyle"
+				android:text="1/x" android:id="@+id/recip" android:tag="1/x"
+				android:layout_toRightOf="@+id/blank3" />
+			<Button android:onClick="shiftClickHandler" style="@style/CalculatorTextButtonStyle"
+				android:text="x&#x207f;" android:id="@+id/power" android:tag="pow"
+				android:layout_below="@+id/recip" android:layout_toRightOf="@+id/blank3" />
+			<Button style="@style/MissingButtonStyle" android:id="@+id/blank4"
+				android:layout_below="@+id/swap" />
+			<Button style="@style/MissingButtonStyle" android:id="@+id/blank5"
+				android:layout_below="@+id/swap" android:layout_toRightOf="@+id/blank4"/>	
+			<Button android:onClick="shiftClickHandler" style="@style/CalculatorTextButtonStyle"
+				android:id="@+id/setdp" android:tag="sdp" android:text="SET DP"
+				android:layout_below="@+id/swap" android:layout_toRightOf="@+id/blank5" />
+
+		</com.ath0.rpn.KeypadLayout>
+
+	</ViewAnimator>
+
+</LinearLayout>

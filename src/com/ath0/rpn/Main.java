@@ -10,6 +10,7 @@ import java.io.ObjectOutputStream;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.res.Configuration;
 import android.graphics.PorterDuff;
 import android.os.Bundle;
 import android.util.Log;
@@ -59,6 +60,14 @@ public class Main extends Activity implements OnKeyListener {
      * Update the 4-level stack.
      */
     public void updateDisplay() {
+    	final TextView t = (TextView) findViewById(R.id.Display);
+    	int lines;
+    	if (getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE) {
+    		lines = 2;
+    	} else {
+    		lines = 4;
+    	}
+    	System.out.println("Lines = " + Integer.toString(lines));
     	StringBuilder text;
     	if (this.buffer.isEmpty() && this.error == null) {
     		if (this.stack.isEmpty()) {
@@ -72,10 +81,10 @@ public class Main extends Activity implements OnKeyListener {
     				}
     			}
     		} else {
-    			text = this.stack.toString(4);
+    			text = this.stack.toString(lines);
     		}
     	} else {
-    		text = this.stack.toString(3);
+    		text = this.stack.toString(lines - 1);
     		text.append("\n");
     		if (this.error == null) {
     			text.append(this.buffer.get());
@@ -84,7 +93,7 @@ public class Main extends Activity implements OnKeyListener {
     			this.error = null;
     		}
     	}
-    	final TextView t = (TextView) findViewById(R.id.Display);
+    	t.setLines(lines);
     	t.setText(text);
     	scrollToRight();
     }

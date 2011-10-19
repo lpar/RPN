@@ -194,7 +194,7 @@ public class CalculatorStack implements Serializable {
 	public String reciprocal() {
 		String result = null;
 		if (!this.stack.isEmpty()) {
-			BigDecimal x = this.stack.peek();
+			BigDecimal x = this.stack.pop();
 			BigDecimal one = new BigDecimal(1);
 			try {
 			BigDecimal y = one.divide(x, INTERNAL_SCALE, RoundingMode.HALF_EVEN);
