@@ -1,10 +1,14 @@
 Copyright
 
-RPN is © mathew <meta@pobox.com> 2010. You may redistribute it so long as no fee is charged for distribution.
+RPN is © mathew <meta@pobox.com> 2010-2012. It is licensed under the GNU Public License (GPL) version 3 or later. See 
+http://meta.ATH0.com/software/rpn
+for further details and source code links.
+
+Your attention is particularly drawn to the license clauses below, taken from the GPL: 
 
 Disclaimer of warranty
 
-There is no warranty for this program, to the extent permitted by applicable law. Except when otherwise stated in writing the copyright holders and/or other parties provide the program "as is" without warranty of any kind, either expressed or implied, including, but not limited to, the implied warranties of merchantability and fitness for a particular purpose. The entire risk as to the quality and performance of the program is with you. Should the program prove defective, you assume the cost of all necessary servicing, repair or correction.
+There is no warranty for the program, to the extent permitted by applicable law. Except when otherwise stated in writing the copyright holders and/or other parties provide the program "as is" without warranty of any kind, either expressed or implied, including, but not limited to, the implied warranties of merchantability and fitness for a particular purpose. The entire risk as to the quality and performance of the program is with you. Should the program prove defective, you assume the cost of all necessary servicing, repair or correction.
 
 Limitation of liability
 
