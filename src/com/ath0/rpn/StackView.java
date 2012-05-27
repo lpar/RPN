@@ -1,7 +1,8 @@
 package com.ath0.rpn;
 
+import android.content.ClipData;
 import android.content.Context;
-import android.text.ClipboardManager;
+import android.content.ClipboardManager;
 import android.util.AttributeSet;
 import android.widget.EditText;
 
@@ -26,7 +27,8 @@ public class StackView extends EditText {
     		String text = this.getText().toString();
     		int lastnl = text.lastIndexOf('\n');
     		String tocopy = text.substring(lastnl + 1);
-    		clipboard.setText(tocopy);
+    		ClipData clip = ClipData.newPlainText("RPN calculator value",tocopy);
+    		clipboard.setPrimaryClip(clip);
     		return true;
     	}
     	return false;

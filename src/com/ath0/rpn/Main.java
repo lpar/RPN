@@ -11,20 +11,15 @@ import java.io.ObjectOutputStream;
 import android.app.Activity;
 import android.content.Context;
 import android.content.res.Configuration;
-import android.graphics.PorterDuff;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.Display;
-import android.view.HapticFeedbackConstants;
 import android.view.KeyEvent;
 import android.view.SoundEffectConstants;
 import android.view.View;
 import android.view.View.OnKeyListener;
-import android.widget.Button;
 import android.widget.HorizontalScrollView;
 import android.widget.TextView;
 import android.widget.Toast;
-import android.widget.ViewAnimator;
 
 public class Main extends Activity implements OnKeyListener {
 	
@@ -39,20 +34,15 @@ public class Main extends Activity implements OnKeyListener {
         setContentView(R.layout.main);
         // Request that the main view be laid out
   //  	Log.i("onCreate",Integer.toString(width));
-        final TextView t = (TextView) findViewById(R.id.Display);
+   /*     final TextView t = (TextView) findViewById(R.id.Display);
     	Display display = getWindowManager().getDefaultDisplay(); 
     	int width = display.getWidth();
         t.setMinWidth(width);
         t.setFocusable(true);
         t.setFocusableInTouchMode(true);
         t.requestFocus();
-        t.setOnKeyListener(this);
+        t.setOnKeyListener(this); */
         loadState();
-        // Make the shift keys orangey
-        Button shift = (Button) findViewById(R.id.shift);
-        shift.getBackground().setColorFilter(0xFFFF7F00, PorterDuff.Mode.MULTIPLY);
-        Button unshift = (Button) findViewById(R.id.unshift);
-        unshift.getBackground().setColorFilter(0xFFFF7F00, PorterDuff.Mode.MULTIPLY);
         updateDisplay();
     }
        
@@ -182,37 +172,6 @@ public class Main extends Activity implements OnKeyListener {
      */
     public void clickHandler(final View v) {
     	final String key = (String) v.getTag();
-    	if ("bsp".equals(key)) {
-    		keyDelete();
-    	} else if ("chs".equals(key)) {
-    		implicitPush();
-    		this.stack.chs();
-    		updateDisplay();
-    	} else if ("enter".equals(key)) {
-    		keyEnter();
-    	} else {
-    		final char c = key.charAt(0);
-    		keyOther(c);
-    	}
-    	v.performHapticFeedback(HapticFeedbackConstants.KEYBOARD_TAP,HapticFeedbackConstants.FLAG_IGNORE_GLOBAL_SETTING);
-    	v.playSoundEffect(SoundEffectConstants.CLICK);
-    }
-    
-    /**
-     * Click handler for on-screen shift key.
-     * @param v
-     */
-    public void shiftHandler(final View v) {
-    	ViewAnimator anim = (ViewAnimator) findViewById(R.id.KeyboardAnimator); 
-    	anim.showNext();
-    }
-
-    /**
-     * Click handler for second (shifted) keyboard buttons.
-     * @param v
-     */
-    public void shiftClickHandler(final View v) {
-    	final String key = (String) v.getTag();
     	if ("sdp".equals(key)) {
     		implicitPush();
     		this.stack.setScale();
@@ -233,8 +192,20 @@ public class Main extends Activity implements OnKeyListener {
     		implicitPush();
     		this.error = this.stack.reciprocal();
     		updateDisplay();
+    	} else if ("bsp".equals(key)) {
+    		keyDelete();
+    	} else if ("chs".equals(key)) {
+    		implicitPush();
+    		this.stack.chs();
+    		updateDisplay();
+    	} else if ("enter".equals(key)) {
+    		keyEnter();
+    	} else {
+    		final char c = key.charAt(0);
+    		keyOther(c);
     	}
-    	this.shiftHandler(v);
+    //	v.performHapticFeedback(HapticFeedbackConstants.KEYBOARD_TAP,HapticFeedbackConstants.FLAG_IGNORE_GLOBAL_SETTING);
+    	v.playSoundEffect(SoundEffectConstants.CLICK);
     }
     
     /**

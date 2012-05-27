@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:orientation="vertical">
+
+    <FrameLayout android:layout_width="wrap_content" android:layout_weight="1.0"
+         android:layout_height="0dp" android:fillViewport="true">
+        
+    <HorizontalScrollView
+        android:id="@+id/Scroll"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="4dp"
+        android:layout_marginLeft="4dp"
+        android:layout_marginRight="4dp"
+        android:fillViewport="true">
+
+        <LinearLayout android:id="@+id/ScrollInsides"
+			android:orientation="horizontal" android:layout_width="wrap_content"
+			android:layout_height="fill_parent" android:fillViewport="true"> 
+
+     <TextView
+         android:id="@+id/Display"
+         style="@android:style/TextAppearance.Large"
+         android:layout_width="fill_parent"
+         android:layout_height="wrap_content"
+         android:layout_gravity="bottom|right"
+         android:background="#eeeeee"
+         android:gravity="bottom|right"
+         android:paddingBottom="4sp"
+         android:paddingLeft="0sp"
+         android:paddingRight="8sp"
+         android:paddingTop="0sp"
+         android:scrollHorizontally="false"
+         android:text="&#x0a;&#x0a;&#x0a;&#x0a;&#x0a;&#x0a;&#x0a;&#x0a;&#x0a;&#x0a;&#x0a;&#x0a;"
+         android:textColor="#000"
+         android:typeface="monospace" />
+
+     </LinearLayout>
+     </HorizontalScrollView>
+     
+      <View
+        android:layout_width="fill_parent"
+        android:layout_height="8dp"
+        android:background="@drawable/gradient"/>
+     
+    </FrameLayout>
+    
+    <com.ath0.rpn.CalculatorKeyLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/keygrid"
+        android:layout_weight="0"
+        android:columnCount="5"
+        android:gravity="fill"
+        android:rowCount="5" >
+
+<Button android:text="&#x221a;" android:id="@+id/sqrt" android:onClick="clickHandler" android:tag="sqrt" style="?android:attr/buttonStyleSmall" />
+
+<Button android:text="&#x215f;&#x2093;" android:id="@+id/recip" android:onClick="clickHandler" android:tag="1/x" style="?android:attr/buttonStyleSmall" />
+
+<Button android:text="&#x2093;&#x207f;" android:id="@+id/power" android:onClick="clickHandler" android:tag="pow" style="?android:attr/buttonStyleSmall" />
+
+<Button android:text="SWAP" android:id="@+id/swap" android:onClick="clickHandler" android:tag="swap" style="?android:attr/buttonStyleSmall" />
+
+<Button android:text="DROP" android:id="@+id/drop" android:onClick="clickHandler" android:tag="drop" style="?android:attr/buttonStyleSmall" />
+
+<Button android:text="SET DP" android:id="@+id/sdp" android:onClick="clickHandler" android:tag="sdp" style="?android:attr/buttonStyleSmall" />
+ 
+			<Button
+			    android:id="@+id/k7"
+			    android:onClick="clickHandler"
+			    android:tag="7"
+			    android:text="7" />
+
+			<Button android:text="8" android:id="@+id/k8" android:tag="8" android:onClick="clickHandler" />
+
+			<Button android:text="9" android:id="@+id/k9" android:tag="9" android:onClick="clickHandler" />
+
+			<Button android:text="&#x00f7;" android:id="@+id/div" android:tag="/" android:onClick="clickHandler" />
+
+
+			<Button android:text="&#x232b;" android:id="@+id/bsp" android:tag="bsp" android:onClick="clickHandler" />
+
+			<Button android:text="4" android:id="@+id/k4" android:tag="4" android:onClick="clickHandler" />
+
+			<Button android:text="5" android:id="@+id/k5" android:tag="5" android:onClick="clickHandler" />
+
+			<Button android:text="6" android:id="@+id/k6" android:tag="6" android:onClick="clickHandler" />
+
+			<Button android:text="&#x00d7;" android:id="@+id/mult" android:tag="*" android:onClick="clickHandler" />
+
+
+			<Button android:text="E&#x0a;N&#x0a;T&#x0a;E&#x0a;R" android:id="@+id/enter" android:tag="enter" style="?android:attr/buttonStyleSmall" android:layout_rowSpan="2" android:onClick="clickHandler"  />
+
+			<Button android:text="1" android:id="@+id/k1" android:tag="1" android:onClick="clickHandler" />
+
+			<Button android:text="2" android:id="@+id/k2" android:tag="2" android:onClick="clickHandler" />
+
+			<Button android:text="3" android:id="@+id/k3" android:tag="3" android:onClick="clickHandler" />
+
+			<Button android:text="&#x2212;" android:id="@+id/minus" android:tag="-" android:onClick="clickHandler" />
+			
+			
+			<Button android:text="0" android:id="@+id/k0" android:tag="0" android:onClick="clickHandler" />
+
+			<Button android:onClick="clickHandler" android:id="@+id/point" android:text="&#x00b7;" android:tag="." />
+
+			<Button android:onClick="clickHandler" android:id="@+id/chs" android:tag="chs" android:text="&#x00b1;" />
+
+			<Button android:text="&#x002b;" android:id="@+id/plus" android:tag="+" android:onClick="clickHandler" />
+        
+    </com.ath0.rpn.CalculatorKeyLayout>
+   
+</LinearLayout>

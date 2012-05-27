@@ -1,6 +1,6 @@
 Copyright
 
-RPN is Â© mathew <meta@pobox.com> 2010-2012. It is licensed under the GNU Public License (GPL) version 3 or later. See 
+RPN is © mathew <meta@pobox.com> 2010-2012. It is licensed under the GNU Public License (GPL) version 3 or later. See 
 http://meta.ATH0.com/software/rpn
 for further details and source code links.
 
