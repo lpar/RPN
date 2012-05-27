@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Action bar menu -->
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <!-- We use the system IDs for copy and paste, and the system-provided internationalized title -->
+    <item android:id="@android:id/copy" android:title="@android:string/copy" android:showAsAction="never"></item>
+    <item android:id="@android:id/paste" android:title="@android:string/paste" android:showAsAction="never"></item>
+</menu>

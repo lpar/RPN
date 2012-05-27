@@ -16,7 +16,7 @@
    version="1.1"
    inkscape:version="0.48.0 r9654"
    sodipodi:docname="RPN calculator.svg"
-   inkscape:export-filename="/home/meta/Documents/My icons/RPN calculator 512.png"
+   inkscape:export-filename="/Users/meta/Programming/Eclipse Workspace/RPN/Artwork/RPN calculator 512.png"
    inkscape:export-xdpi="90"
    inkscape:export-ydpi="90"
    style="display:inline">
@@ -435,7 +435,8 @@
        y1="981.41119"
        x2="110.96732"
        y2="852.21997"
-       gradientUnits="userSpaceOnUse" />
+       gradientUnits="userSpaceOnUse"
+       gradientTransform="translate(-0.93723167,-1.0169671e-5)" />
     <linearGradient
        inkscape:collect="always"
        xlink:href="#linearGradient3989"
@@ -453,7 +454,8 @@
        y1="739.17767"
        x2="348.75443"
        y2="609.98651"
-       gradientUnits="userSpaceOnUse" />
+       gradientUnits="userSpaceOnUse"
+       gradientTransform="translate(-13.247811,-49.611132)" />
     <filter
        id="filter4438"
        inkscape:label="Drop shadow"
@@ -586,6 +588,56 @@
            in="SourceGraphic" />
       </feMerge>
     </filter>
+    <linearGradient
+       inkscape:collect="always"
+       xlink:href="#linearGradient3989"
+       id="linearGradient3115"
+       gradientUnits="userSpaceOnUse"
+       gradientTransform="translate(-13.247811,-49.611132)"
+       x1="380.45938"
+       y1="739.17767"
+       x2="348.75443"
+       y2="609.98651" />
+    <linearGradient
+       inkscape:collect="always"
+       xlink:href="#linearGradient3989"
+       id="linearGradient3117"
+       gradientUnits="userSpaceOnUse"
+       gradientTransform="translate(-13.247811,-49.611132)"
+       x1="380.45938"
+       y1="739.17767"
+       x2="348.75443"
+       y2="609.98651" />
+    <linearGradient
+       inkscape:collect="always"
+       xlink:href="#linearGradient3989"
+       id="linearGradient3119"
+       gradientUnits="userSpaceOnUse"
+       gradientTransform="translate(-13.247811,-49.611132)"
+       x1="380.45938"
+       y1="739.17767"
+       x2="348.75443"
+       y2="609.98651" />
+    <linearGradient
+       inkscape:collect="always"
+       xlink:href="#linearGradient3989"
+       id="linearGradient3122"
+       gradientUnits="userSpaceOnUse"
+       gradientTransform="matrix(1.0093062,0,0,0.9907796,17.402152,-39.203561)"
+       x1="380.45938"
+       y1="739.17767"
+       x2="348.75443"
+       y2="609.98651" />
+    <linearGradient
+       inkscape:collect="always"
+       xlink:href="#linearGradient3989"
+       id="linearGradient3125"
+       gradientUnits="userSpaceOnUse"
+       gradientTransform="matrix(1.0093062,0,0,0.9907796,-46.385288,-35.697331)"
+       x1="380.45938"
+       y1="739.17767"
+       x2="348.75443"
+       y2="609.98651" />
   </defs>
   <sodipodi:namedview
      id="base"
@@ -594,16 +646,16 @@
      borderopacity="1.0"
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
-     inkscape:zoom="1.4726562"
-     inkscape:cx="255.32095"
-     inkscape:cy="256"
+     inkscape:zoom="0.84"
+     inkscape:cx="44.606664"
+     inkscape:cy="257.63311"
      inkscape:document-units="px"
-     inkscape:current-layer="layer3"
+     inkscape:current-layer="layer1"
      showgrid="true"
-     inkscape:window-width="1920"
-     inkscape:window-height="1025"
-     inkscape:window-x="-2"
-     inkscape:window-y="-3"
+     inkscape:window-width="1280"
+     inkscape:window-height="752"
+     inkscape:window-x="0"
+     inkscape:window-y="0"
      inkscape:window-maximized="1">
     <inkscape:grid
        type="xygrid"
@@ -638,31 +690,31 @@
        height="224"
        x="16"
        y="16"
-       ry="32" />
+       ry="16" />
     <rect
-       style="fill:url(#linearGradient3919);fill-opacity:1.0;stroke:none;display:inline;filter:url(#filter4480)"
+       style="fill:url(#linearGradient3919);fill-opacity:1;stroke:none;display:inline;filter:url(#filter4480)"
        id="rect3894-2"
        width="224"
        height="224"
        x="256"
        y="16"
-       ry="32" />
+       ry="16" />
     <rect
-       style="fill:url(#linearGradient3953);fill-opacity:1.0;stroke:#000000;stroke-width:0;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;display:inline;filter:url(#filter4452)"
+       style="fill:url(#linearGradient3953);fill-opacity:1;stroke:#000000;stroke-width:0;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;display:inline;filter:url(#filter4452)"
        id="rect3894-8"
        width="224"
        height="224"
        x="16"
        y="256"
-       ry="32" />
+       ry="16" />
     <rect
-       style="fill:url(#linearGradient3953-5);fill-opacity:1.0;stroke:#000000;stroke-width:0;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;display:inline;filter:url(#filter4438)"
+       style="fill:url(#linearGradient3953-5);fill-opacity:1;stroke:#000000;stroke-width:0;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;display:inline;filter:url(#filter4438)"
        id="rect3894-6"
        width="224"
        height="224"
        x="256"
        y="256"
-       ry="32" />
+       ry="16" />
   </g>
   <g
      inkscape:label="Layer 1"
@@ -677,7 +729,7 @@
        height="192"
        x="32"
        y="572.36218"
-       ry="15.999997" />
+       ry="0" />
     <rect
        style="fill:url(#linearGradient3832);fill-opacity:1;stroke:none"
        id="rect3007-4"
@@ -685,7 +737,7 @@
        height="192"
        x="272"
        y="572.36218"
-       ry="15.999997" />
+       ry="0" />
     <rect
        style="fill:url(#linearGradient3879);fill-opacity:1;stroke:none"
        id="rect3007-1"
@@ -693,7 +745,7 @@
        height="192"
        x="32"
        y="812.36218"
-       ry="15.999997" />
+       ry="0" />
     <rect
        style="fill:url(#linearGradient3832-0);fill-opacity:1;stroke:none"
        id="rect3007-4-1"
@@ -701,10 +753,10 @@
        height="192"
        x="272"
        y="812.36218"
-       ry="15.999997" />
+       ry="0" />
     <text
        xml:space="preserve"
-       style="font-size:50.14451599000000215px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:url(#linearGradient4011);fill-opacity:1;stroke:none;font-family:Sans"
+       style="font-size:50.14451599px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:url(#linearGradient4011);fill-opacity:1;stroke:none;font-family:Sans"
        x="80.286858"
        y="739.04614"
        id="text3916"
@@ -714,33 +766,32 @@
          id="tspan3918"
          x="80.286858"
          y="739.04614"
-         style="font-size:180.52024840999999356px;font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-family:Droid Sans;-inkscape-font-specification:Droid Sans Bold;fill-opacity:1;fill:url(#linearGradient4011)">1</tspan></text>
+         style="font-size:180.52024840999999356px;font-style:normal;font-variant:normal;font-weight:500;font-stretch:normal;fill:url(#linearGradient4011);fill-opacity:1;font-family:Roboto;-inkscape-font-specification:Roboto Medium">1</tspan></text>
+    <path
+       inkscape:connector-curvature="0"
+       id="path3113"
+       d="m 332,676.36218 c 13.70301,0.0255 79.24645,-0.13594 80,0 l 0,-72 16,0 0,88 -96,0"
+       style="font-size:232.22215271px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:url(#linearGradient3125);fill-opacity:1;stroke:none;font-family:Droid Sans Fallback;-inkscape-font-specification:Droid Sans Fallback"
+       sodipodi:nodetypes="cccccc" />
+    <path
+       sodipodi:nodetypes="ccccccscccccc"
+       inkscape:connector-curvature="0"
+       id="path3109"
+       d="m 337.12902,689.64099 16.48007,31.45639 c 1.83106,4.19417 2.74661,7.19001 2.74668,8.98753 -7e-5,2.39666 -0.91562,3.595 -2.74668,3.59503 -2.44155,-3e-5 -5.18822,-1.49795 -8.24003,-4.49377 L 306,695.03352 c -3.66226,-3.595 -5.49337,-7.19001 -5.49336,-10.78504 -1e-5,-3.59499 1.8311,-6.89042 5.49336,-9.8863 l 39.36906,-35.05139 c 3.05181,-2.99577 5.79848,-4.49369 8.24003,-4.49377 1.83106,8e-5 2.74661,1.498 2.74668,4.49377 -7e-5,1.79757 -0.91562,4.79342 -2.74668,8.98754 l -18.83584,30.01399"
+       style="font-size:232.22215271px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:url(#linearGradient3122);fill-opacity:1;stroke:none;font-family:Droid Sans Fallback;-inkscape-font-specification:Droid Sans Fallback" />
     <text
        xml:space="preserve"
-       style="font-size:64.50615691999999513px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:url(#linearGradient4013);fill-opacity:1;stroke:none;font-family:Sans"
-       x="266.88739"
-       y="756.49103"
-       id="text3916-2"
-       sodipodi:linespacing="125%"
-       transform="scale(1.0093062,0.9907796)"><tspan
-         sodipodi:role="line"
-         id="tspan3918-2"
-         x="266.88739"
-         y="756.49103"
-         style="font-size:232.22215271000001735px;font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-family:Droid Sans;-inkscape-font-specification:Droid Sans Bold;fill-opacity:1;fill:url(#linearGradient4013)">⤶</tspan></text>
-    <text
-       xml:space="preserve"
-       style="font-size:49.56055068999999236px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:url(#linearGradient4003);fill-opacity:1;stroke:none;font-family:Sans"
-       x="80.1996"
+       style="font-size:49.56055069px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:url(#linearGradient4003);fill-opacity:1;stroke:none;font-family:Sans"
+       x="79.262367"
        y="981.41119"
        id="text3916-1"
        sodipodi:linespacing="125%"
        transform="scale(1.0093062,0.9907796)"><tspan
          sodipodi:role="line"
          id="tspan3918-8"
-         x="80.1996"
+         x="79.262367"
          y="981.41119"
-         style="font-size:178.41798400999999785px;font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-family:Droid Sans;-inkscape-font-specification:Droid Sans Bold;fill-opacity:1;fill:url(#linearGradient4003)">2</tspan></text>
+         style="font-size:178.41798401px;font-style:normal;font-variant:normal;font-weight:500;font-stretch:normal;fill:url(#linearGradient4003);fill-opacity:1;font-family:Roboto;-inkscape-font-specification:Roboto Medium">2</tspan></text>
     <text
        xml:space="preserve"
        style="font-size:77.69850922000000537px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:url(#linearGradient3995);fill-opacity:1;stroke:none;font-family:Sans"

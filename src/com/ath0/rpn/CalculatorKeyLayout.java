@@ -1,6 +1,8 @@
 package com.ath0.rpn;
 
 import android.content.Context;
+import android.content.res.AssetManager;
+import android.graphics.Typeface;
 import android.util.AttributeSet;
 import android.widget.Button;
 import android.widget.GridLayout;
@@ -41,7 +43,9 @@ public class CalculatorKeyLayout extends GridLayout {
 		int padding = enter.getTop() - del.getTop();
 	/*	System.out.println("Padding seems to be" + Integer.toString(padding)); */
 		// Set some keys to custom font so they show up correctly
-	//	Typeface rpnfont = Typeface.createFromAsset(this.mycontext.getAssets(), "samplefont.ttf");
+		AssetManager assets = this.mycontext.getAssets();
+		Typeface rpnfont = Typeface.createFromAsset(assets, "fonts/RPN.TTF");
+		Typeface roboto = Typeface.createFromAsset(assets, "fonts/Roboto-Light.ttf");
 		// Resize everything except enter
 		for(int i = 0; i < getChildCount(); i++) {
 		    Button key = (Button) getChildAt(i);
@@ -54,7 +58,9 @@ public class CalculatorKeyLayout extends GridLayout {
 		    key.setWidth(kw);
 		    // System.out.println("Set width and height for key #" + Integer.toString(i));
 		    if (k == R.id.bsp || k == R.id.recip || k == R.id.power || k == R.id.sqrt) {
-	//	    	key.setTypeface(rpnfont);
+		    	key.setTypeface(rpnfont);
+		    } else {
+		    	key.setTypeface(roboto);
 		    }
 		}
 		

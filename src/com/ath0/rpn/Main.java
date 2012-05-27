@@ -9,14 +9,20 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 
 import android.app.Activity;
+import android.content.ClipData;
+import android.content.ClipDescription;
+import android.content.ClipboardManager;
 import android.content.Context;
-import android.content.res.Configuration;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.KeyEvent;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.SoundEffectConstants;
 import android.view.View;
 import android.view.View.OnKeyListener;
+import android.widget.FrameLayout;
 import android.widget.HorizontalScrollView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -26,6 +32,8 @@ public class Main extends Activity implements OnKeyListener {
 	private InputBuffer buffer;
 	private CalculatorStack stack;
 	private String error;
+	private Menu optionsmenu;
+	private int screenlines;
 	
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -43,26 +51,43 @@ public class Main extends Activity implements OnKeyListener {
         t.requestFocus();
         t.setOnKeyListener(this); */
         loadState();
-        updateDisplay();
+    }
+    
+    @Override
+    public void onWindowFocusChanged(boolean hasFocus) {
+    	super.onWindowFocusChanged(hasFocus);
+        // At this point we are guaranteed to have been laid out on screen
+    	final TextView t = (TextView) findViewById(R.id.Display);
+    	final FrameLayout hsv = (FrameLayout) findViewById(R.id.TopFrame);
+    	this.screenlines = 1 + Math.round((float) hsv.getHeight() / (float) t.getLineHeight());
+    	System.out.println("Frame height = " + Integer.toString(hsv.getHeight()));
+    	System.out.println("Line height = " + Integer.toString(t.getLineHeight()));
+    	System.out.println("Lines = " + Integer.toString(this.screenlines));
+    	updateDisplay();
+    }
+    
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+    	this.optionsmenu = menu;
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.main, menu);
+        return true;
     }
        
     /**
-     * Update the 4-level stack.
+     * Update the N-level stack.
      */
     public void updateDisplay() {
     	final TextView t = (TextView) findViewById(R.id.Display);
-    	int lines;
-    	if (getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE) {
-    		lines = 2;
-    	} else {
-    		lines = 4;
-    	}
-    	System.out.println("Lines = " + Integer.toString(lines));
     	StringBuilder text;
     	if (this.buffer.isEmpty() && this.error == null) {
     		if (this.stack.isEmpty()) {
     			// Display zero rather than a totally empty display
-    			text = new StringBuilder("\n\n\n0");
+    			text = new StringBuilder();
+    			for (int i = 1; i < this.screenlines - 1; i++) {
+    				text.append('\n');
+    			}
+    			text.append('0');
     			int sc = this.stack.getScale();
     			if (sc > 0) {
     				text.append('.');
@@ -71,10 +96,10 @@ public class Main extends Activity implements OnKeyListener {
     				}
     			}
     		} else {
-    			text = this.stack.toString(lines);
+    			text = this.stack.toString(this.screenlines);
     		}
     	} else {
-    		text = this.stack.toString(lines - 1);
+    		text = this.stack.toString(this.screenlines - 1);
     		text.append("\n");
     		if (this.error == null) {
     			text.append(this.buffer.get());
@@ -83,7 +108,7 @@ public class Main extends Activity implements OnKeyListener {
     			this.error = null;
     		}
     	}
-    	t.setLines(lines);
+    	t.setLines(this.screenlines);
     	t.setText(text);
     	scrollToRight();
     }
@@ -198,6 +223,10 @@ public class Main extends Activity implements OnKeyListener {
     		implicitPush();
     		this.stack.chs();
     		updateDisplay();
+    	} else if ("sqrt".equals(key)) {
+    		implicitPush();
+    		this.stack.sqrt();
+    		updateDisplay();
     	} else if ("enter".equals(key)) {
     		keyEnter();
     	} else {
@@ -297,5 +326,64 @@ public class Main extends Activity implements OnKeyListener {
     	Toast toast = Toast.makeText(context, message, duration);
     	toast.show();
     	Log.e(thrower,message);
+    }
+    
+    private boolean copy() {
+    	Context c = this.getBaseContext();
+		ClipboardManager clipboard = (ClipboardManager) c.getSystemService(Context.CLIPBOARD_SERVICE);
+		final TextView t = (TextView) findViewById(R.id.Display);
+		String text = t.getText().toString();
+		int lastnl = text.lastIndexOf('\n');
+		String tocopy = text.substring(lastnl + 1);
+		System.out.println("Putting " + tocopy + " on clipboard");
+		ClipData clip = ClipData.newPlainText("RPN calculator value", tocopy);
+		clipboard.setPrimaryClip(clip);
+		return true;
+    }
+    
+    private boolean paste() {
+    	Context ctx = this.getBaseContext();
+    	ClipboardManager clipboard = (ClipboardManager) ctx.getSystemService(Context.CLIPBOARD_SERVICE);
+    	ClipData.Item item = clipboard.getPrimaryClip().getItemAt(0);
+    	CharSequence text = item.getText();
+    	System.out.println("Asked to paste " + text.toString());
+    	// Dispatch as keypresses to self
+    	for (int i = 0; i < text.length(); i++) {
+    		char c = text.charAt(i);
+    		keyOther(c);
+    	}
+    	return true;
+    }
+    
+    @Override
+    public boolean onPrepareOptionsMenu(Menu menu) {
+    	System.out.println("Preparing options menu");
+    	Context c = this.getBaseContext();
+    	ClipboardManager clipboard = (ClipboardManager) c.getSystemService(Context.CLIPBOARD_SERVICE);
+    	MenuItem pasteitem = this.optionsmenu.findItem(android.R.id.paste);
+    	if (!(clipboard.hasPrimaryClip())) {
+    		System.out.println("Clipboard is empty");
+    		pasteitem.setEnabled(false);
+    	} else if (!(clipboard.getPrimaryClipDescription().hasMimeType(ClipDescription.MIMETYPE_TEXT_PLAIN))) {
+    		System.out.println("Clipboard has no plain text");
+    		pasteitem.setEnabled(false);
+    	} else {
+    		System.out.println("Clipboard is OK");
+    		pasteitem.setEnabled(true);
+    	}
+    	return true;
+    }
+    
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+    	System.out.println("Menu item selected!");
+    	switch (item.getItemId()) {
+    	case android.R.id.copy:
+    		return this.copy();
+    	case android.R.id.paste:
+    		return this.paste();
+    	default:
+    		return super.onOptionsItemSelected(item);
+    	}
     }
 }
