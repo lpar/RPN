@@ -32,9 +32,9 @@ public class CalculatorStack implements Serializable {
 	// calculations.
 	private static final int INTERNAL_SCALE = 32;
 
-	private final Stack<BigDecimal> stack;
+	transient private final Stack<BigDecimal> stack;
 
-	// Initial scale is 2 decimal places, as that's the most useful for general 
+  // Initial scale is 2 decimal places, as that's the most useful for general 
 	// everyday calculations.
 	private int scale = 2;
 
@@ -45,12 +45,12 @@ public class CalculatorStack implements Serializable {
 
 	/**
 	 * Pushes a value onto the stack.
-	 * @param n A valid decimal number, in a String. Usually taken from the 
+	 * @param number A valid decimal number, in a String. Usually taken from the 
 	 * InputBuffer.
 	 */
-	public void push(String n) {
-		BigDecimal x = new BigDecimal(n);
-		this.stack.push(x);
+	public void push(final String number) {
+		final BigDecimal newnum = new BigDecimal(number);
+		this.stack.push(newnum);
 	}
 	
 	/**
@@ -65,16 +65,16 @@ public class CalculatorStack implements Serializable {
 	 * @param levels the number of levels of stack to return
 	 * @return a text representation of the stack
 	 */
-	public StringBuilder toString(int levels) {
+	public StringBuilder toString(final int levels) {
 		final StringBuilder result = new StringBuilder(TYPICAL_LENGTH_X4);
-		int depth = this.stack.size();
+		final int depth = this.stack.size();
 		for (int i = 0; i < levels; i++) {
 			if (i != 0) {
 				result.append('\n');
 			}
-			int j = depth - levels + i;
-			if (j >= 0) {
-				result.append(formatNumber(this.stack.get(j)));
+			final int idx = depth - levels + i;
+			if (idx >= 0) {
+				result.append(formatNumber(this.stack.get(idx)));
 			}
 		}
 		return result;
@@ -83,12 +83,13 @@ public class CalculatorStack implements Serializable {
 	/**
 	 * Formats a BigDecimal number to a fixed number of decimal places, and adds 
 	 * thousands commas.
-	 * @param x
+	 * @param number
 	 * @return
 	 */
-	private String formatNumber(final BigDecimal x) {
+	private String formatNumber(final BigDecimal number) {
 		final StringBuilder result = new StringBuilder(TYPICAL_LENGTH);
-		result.append(x.setScale(this.scale, RoundingMode.HALF_UP).toPlainString());
+		result.append(number.setScale(this.scale, 
+		    RoundingMode.HALF_UP).toPlainString());
 		if (this.scale > 0) {
 			if (result.indexOf(".") == -1) {
 				result.append('.');
@@ -99,15 +100,15 @@ public class CalculatorStack implements Serializable {
 			}
 		}
 		// Add commas
-		int dp = result.indexOf(".");
-		if (dp < 1) {
-			dp = result.length();
+		int dot = result.indexOf(".");
+		if (dot < 1) {
+			dot = result.length();
 		}
 		int lowindex = 0;
 		if (result.charAt(0) == '-') {
 			lowindex = 1;
 		}
-		for (int i = dp - 3; i > lowindex; i -= 3) {
+		for (int i = dot - 3; i > lowindex; i -= 3) {
 			result.insert(i, ',');
 		}
 		return result.toString();
@@ -118,8 +119,8 @@ public class CalculatorStack implements Serializable {
 	 */
 	public void chs() {
 		if (!this.stack.isEmpty()) {
-			BigDecimal x = this.stack.pop();
-			this.stack.push(x.negate());
+			final BigDecimal topnum = this.stack.pop();
+			this.stack.push(topnum.negate());
 		}
 	}
 
@@ -137,8 +138,8 @@ public class CalculatorStack implements Serializable {
 	 */
 	public void dup() {
 		if (!this.stack.isEmpty()) {
-			BigDecimal x = this.stack.peek();
-			this.stack.push(x);
+			final BigDecimal topnum = this.stack.peek();
+			this.stack.push(topnum);
 		}
 	}
 	
@@ -147,8 +148,8 @@ public class CalculatorStack implements Serializable {
    */
 	public void swap() {
 		if (this.stack.size() > 1) {
-			BigDecimal x = this.stack.pop();
-			BigDecimal y = this.stack.pop();
+			final BigDecimal x = this.stack.pop();
+			final BigDecimal y = this.stack.pop();
 			this.stack.push(x);
 			this.stack.push(y);
 		}
@@ -160,9 +161,9 @@ public class CalculatorStack implements Serializable {
 	 */
 	public void add() {
 		if (this.stack.size() > 1) {
-			BigDecimal x = this.stack.pop();
-			BigDecimal y = this.stack.pop();
-			BigDecimal r = y.add(x);
+			final BigDecimal x = this.stack.pop();
+			final BigDecimal y = this.stack.pop();
+			final BigDecimal r = y.add(x);
 			this.stack.push(r);
 		}
 	}
@@ -249,13 +250,12 @@ public class CalculatorStack implements Serializable {
 		String result = null;
 		if (!this.stack.isEmpty()) {
 			BigDecimal x = this.stack.pop();
-			BigDecimal one = new BigDecimal(1);
 			try {
-			BigDecimal y = one.divide(x, INTERNAL_SCALE, RoundingMode.HALF_EVEN);
-			this.stack.push(y);
+			  BigDecimal y = BigDecimal.ONE.divide(x, INTERNAL_SCALE, 
+			      RoundingMode.HALF_EVEN);
+			  this.stack.push(y);
 			} catch (ArithmeticException e) {
-				result = e.getMessage();
-				//			Log.i("divide", "Error: " + e.getMessage());
+			  result = e.getMessage();
 			}
 		}
 		return result;
@@ -312,7 +312,7 @@ public class CalculatorStack implements Serializable {
      * @param scale the desired scale of the result
      * @return the result value
      */
-    private static BigDecimal sqrt(BigDecimal x, int scale)
+    private static BigDecimal sqrt(final BigDecimal x, final int scale)
     {
         // Check that x >= 0.
         if (x.signum() < 0) {

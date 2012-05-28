@@ -2,6 +2,8 @@ package com.ath0.rpn;
 
 import java.io.Serializable;
 
+import android.util.Log;
+
 /**
  * Implements the calculator's input buffer.
  */
@@ -14,9 +16,9 @@ public class InputBuffer implements Serializable {
 	
 	// A sensible initial capacity that should fit all everyday numbers.
 	private static final int INITIAL_CAPACITY = 32;
-	private final StringBuilder buffer = new StringBuilder(INITIAL_CAPACITY);
+	transient private final StringBuilder buffer = new StringBuilder(INITIAL_CAPACITY);
 
-	public InputBuffer(String value) {
+	public InputBuffer(final String value) {
 		super();
 		this.set(value);
 	}
@@ -25,13 +27,13 @@ public class InputBuffer implements Serializable {
 		super();
 	}
 	
-	/**
+  /**
 	 * Appends a given character to the buffer, if the result would be a valid 
    * real number. If '.' is appended to an empty buffer, a '0' is added first.
-	 * @param c a digit or '.'
+	 * @param ich a digit or '.'
 	 */
-	public void append(char c) {
-		switch (c) {
+	public void append(final char ich) {
+		switch (ich) {
 		case '.':
 			if (this.buffer.indexOf(".") == -1) {
 				if (this.buffer.length() == 0) {
@@ -41,10 +43,10 @@ public class InputBuffer implements Serializable {
 			}
 			break;
 		case '0':
-			if (!"0".equals(this.buffer)) {
-				this.buffer.append('0');
-			}
-			break;
+		  if (!"0".equals(this.buffer)) {
+		    this.buffer.append('0');
+		  }
+		  break;
 		case '1':
 		case '2':
 		case '3':
@@ -54,8 +56,10 @@ public class InputBuffer implements Serializable {
 		case '7':
 		case '8':
 		case '9':
-			this.buffer.append(c);
-			break;
+		  this.buffer.append(ich);
+		  break;
+		default:
+		  Log.e("append", "Ignoring character '" + ich + "'");
 		}
 	}
 	
@@ -63,9 +67,9 @@ public class InputBuffer implements Serializable {
 	 * Deletes the rightmost character in the buffer
 	 */
 	public void delete() {
-		int x = this.buffer.length();
-		if (x > 0) {
-			this.buffer.setLength(x - 1);
+		final int len = this.buffer.length();
+		if (len > 0) {
+			this.buffer.setLength(len - 1);
 		}
 	}
 	
@@ -88,7 +92,7 @@ public class InputBuffer implements Serializable {
 	 * Sets the value of the buffer
 	 * @param value the value, assumed to be a valid numeric
 	 */
-	public void set(String value) {
+	final public void set(final String value) {
 		this.buffer.setLength(0);
 		this.buffer.append(value);
 	}

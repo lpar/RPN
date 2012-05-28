@@ -15,6 +15,7 @@ import android.content.ClipboardManager;
 import android.content.Context;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.HapticFeedbackConstants;
 import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -32,18 +33,18 @@ import android.widget.Toast;
  */
 public class Main extends Activity implements OnKeyListener {
 
-  private InputBuffer buffer;
-  private CalculatorStack stack;
-  private String error;
-  private Menu optionsmenu;
-  private int screenlines;
+  transient private InputBuffer buffer;
+  transient private CalculatorStack stack;
+  transient private String error;
+  transient private Menu optionsmenu;
+  transient private int screenlines;
 
   /**
    * Typical onCreate for an Android app. Shows an EULA, mostly for the
    * disclaimers on liability if the calculator should give an incorrect value.
    */
   @Override
-  public void onCreate(Bundle savedInstanceState) {
+  public void onCreate(final Bundle savedInstanceState) {
     Log.d("Main", "onCreate");
     super.onCreate(savedInstanceState);
     Eula.show(this);
@@ -59,17 +60,17 @@ public class Main extends Activity implements OnKeyListener {
    * sizing of one or more widgets.
    */
   @Override
-  public void onWindowFocusChanged(boolean hasFocus) {
+  public void onWindowFocusChanged(final boolean hasFocus) {
     super.onWindowFocusChanged(hasFocus);
     // At this point we are guaranteed to have been laid out on screen
-    final TextView t = (TextView) findViewById(R.id.Display);
+    final TextView disp = (TextView) findViewById(R.id.Display);
     final FrameLayout hsv = (FrameLayout) findViewById(R.id.TopFrame);
     this.screenlines = 1 + Math.round((float) hsv.getHeight() / 
-        (float) t.getLineHeight());
+        (float) disp.getLineHeight());
     Log.d("onWindowFocusChanged", "Frame height = " + 
         Integer.toString(hsv.getHeight()));
     Log.d("onWindowFocusChanged", "Line height = " + 
-        Integer.toString(t.getLineHeight()));
+        Integer.toString(disp.getLineHeight()));
     Log.d("onWindowFocusChanged", "Therefore number of lines = " + 
         Integer.toString(this.screenlines));
     // With that done, we can update the display.
@@ -81,9 +82,9 @@ public class Main extends Activity implements OnKeyListener {
    * options menu.
    */
   @Override
-  public boolean onCreateOptionsMenu(Menu menu) {
+  public boolean onCreateOptionsMenu(final Menu menu) {
     this.optionsmenu = menu;
-    MenuInflater inflater = getMenuInflater();
+    final MenuInflater inflater = getMenuInflater();
     inflater.inflate(R.menu.main, menu);
     return true;
   }
@@ -92,7 +93,7 @@ public class Main extends Activity implements OnKeyListener {
    * Updates the N-level stack display on screen.
    */
   public void updateDisplay() {
-    final TextView t = (TextView) findViewById(R.id.Display);
+    final TextView disp = (TextView) findViewById(R.id.Display);
     StringBuilder text;
     if (this.buffer.isEmpty() && this.error == null) {
       if (this.stack.isEmpty()) {
@@ -102,10 +103,10 @@ public class Main extends Activity implements OnKeyListener {
           text.append('\n');
         }
         text.append('0');
-        int sc = this.stack.getScale();
-        if (sc > 0) {
+        final int scale = this.stack.getScale();
+        if (scale > 0) {
           text.append('.');
-          for (int i = 0; i < sc; i++) {
+          for (int i = 0; i < scale; i++) {
             text.append('0');
           }
         }
@@ -122,8 +123,8 @@ public class Main extends Activity implements OnKeyListener {
         this.error = null;
       }
     }
-    t.setLines(this.screenlines);
-    t.setText(text);
+    disp.setLines(this.screenlines);
+    disp.setText(text);
     scrollToRight();
   }
 
@@ -133,8 +134,8 @@ public class Main extends Activity implements OnKeyListener {
    */
   public void implicitPush() {
     if (!this.buffer.isEmpty()) {
-      String x = this.buffer.get();
-      this.stack.push(x);
+      final String num = this.buffer.get();
+      this.stack.push(num);
       this.buffer.zap();
     }
   }
@@ -160,12 +161,12 @@ public class Main extends Activity implements OnKeyListener {
    * behavior of HP Voyager series calculators.)
    */
   private void keyEnter() {
-    if (!this.buffer.isEmpty()) {
-      String x = this.buffer.get();
-      this.stack.push(x);
-      this.buffer.zap();
-    } else {
+    if (this.buffer.isEmpty()) {
       this.stack.dup();
+    } else {
+      final String num = this.buffer.get();
+      this.stack.push(num);
+      this.buffer.zap();
     }
     this.updateDisplay();
   }
@@ -176,7 +177,7 @@ public class Main extends Activity implements OnKeyListener {
    * @param c the char on the key; a digit, '/' '+' '-' '*' or '.'.
    * @return true if the keystroke was handled.
    */
-  private boolean keyOther(char c) {
+  private boolean keyOther(final char c) {
     boolean handled = false;
     switch (c) {
     case '+':
@@ -271,7 +272,8 @@ public class Main extends Activity implements OnKeyListener {
       final char c = key.charAt(0);
       keyOther(c);
     }
-    //	v.performHapticFeedback(HapticFeedbackConstants.KEYBOARD_TAP,HapticFeedbackConstants.FLAG_IGNORE_GLOBAL_SETTING);
+    v.performHapticFeedback(HapticFeedbackConstants.VIRTUAL_KEY,
+        HapticFeedbackConstants.FLAG_IGNORE_VIEW_SETTING);
     v.playSoundEffect(SoundEffectConstants.CLICK);
   }
 
@@ -316,8 +318,8 @@ public class Main extends Activity implements OnKeyListener {
    * Saves state to internal device cache.
    */
   private void saveState() {
-    File dir = getCacheDir();
-    File data = new File(dir,"stack");
+    final File dir = getCacheDir();
+    final File data = new File(dir,"stack");
     FileOutputStream fos = null;
     ObjectOutputStream out = null;
     try {
@@ -335,8 +337,8 @@ public class Main extends Activity implements OnKeyListener {
    * Loads state from internal device cache.
    */
   private void loadState() {
-    File dir = getCacheDir();
-    File data = new File(dir,"stack");
+    final File dir = getCacheDir();
+    final File data = new File(dir,"stack");
     FileInputStream fis = null;
     ObjectInputStream in = null;
     try {
@@ -367,7 +369,7 @@ public class Main extends Activity implements OnKeyListener {
    * @param thrower the method which encountered the error 
    * @param message the error message
    */
-  private void reportError(String thrower, String message) {
+  private void reportError(final String thrower, final String message) {
     Context context = getApplicationContext();
     int duration = Toast.LENGTH_LONG;
     Toast toast = Toast.makeText(context, message, duration);
@@ -419,21 +421,23 @@ public class Main extends Activity implements OnKeyListener {
    * enables or disables the paste operation accordingly.
    */
   @Override
-  public boolean onPrepareOptionsMenu(Menu menu) {
+  public boolean onPrepareOptionsMenu(final Menu menu) {
     Context ctx = this.getBaseContext();
     ClipboardManager clipboard = 
         (ClipboardManager) ctx.getSystemService(Context.CLIPBOARD_SERVICE);
     MenuItem pasteitem = this.optionsmenu.findItem(android.R.id.paste);
-    if (!(clipboard.hasPrimaryClip())) {
+    if (clipboard.hasPrimaryClip()) {
+      if (clipboard.getPrimaryClipDescription().hasMimeType(
+          ClipDescription.MIMETYPE_TEXT_PLAIN)) {
+        Log.d("onPrepareOptionsMenu", "Clipboard is OK");
+        pasteitem.setEnabled(true);
+      } else {
+        Log.d("onPrepareOptionsMenu", "Clipboard has no plain text");
+        pasteitem.setEnabled(false);
+      }
+    } else {
       Log.d("onPrepareOptionsMenu", "Clipboard is empty");
       pasteitem.setEnabled(false);
-    } else if (!(clipboard.getPrimaryClipDescription().hasMimeType(
-        ClipDescription.MIMETYPE_TEXT_PLAIN))) {
-      Log.d("onPrepareOptionsMenu", "Clipboard has no plain text");
-      pasteitem.setEnabled(false);
-    } else {
-      Log.d("onPrepareOptionsMenu", "Clipboard is OK");
-      pasteitem.setEnabled(true);
     }
     return true;
   }
@@ -442,14 +446,18 @@ public class Main extends Activity implements OnKeyListener {
    * Handles an options menu selection, either copy or paste.
    */
   @Override
-  public boolean onOptionsItemSelected(MenuItem item) {
+  public boolean onOptionsItemSelected(final MenuItem item) {
+    boolean result;
     switch (item.getItemId()) {
     case android.R.id.copy:
-      return this.copy();
+      result = this.copy();
+      break;
     case android.R.id.paste:
-      return this.paste();
+      result = this.paste();
+      break;
     default:
-      return super.onOptionsItemSelected(item);
+      result = super.onOptionsItemSelected(item);
     }
+    return result;
   }
 }

@@ -16,22 +16,22 @@ import android.widget.GridLayout;
  */
 public class CalculatorKeyLayout extends GridLayout {
 
-	private Context mycontext;
+	private transient final Context mycontext;
 
 	// We make all the constructors store the context, as we need it later on 
 	// to load fonts.
-	public CalculatorKeyLayout(Context context) {
+	public CalculatorKeyLayout(final Context context) {
 		super(context);
 		this.mycontext = context;
 	}
 
-	public CalculatorKeyLayout(Context context, AttributeSet attrs) {
+	public CalculatorKeyLayout(final Context context, final AttributeSet attrs) {
 		super(context, attrs);
 		this.mycontext = context;
 	}
 
-	public CalculatorKeyLayout(Context context, AttributeSet attrs, 
-	    int defStyle) {
+	public CalculatorKeyLayout(final Context context, final AttributeSet attrs, 
+	    final int defStyle) {
 		super(context, attrs, defStyle);
 		this.mycontext = context;
 	}
@@ -41,46 +41,47 @@ public class CalculatorKeyLayout extends GridLayout {
 	 * compute the key sizes.
 	 */
 	@Override
-	public void onSizeChanged(int w, int h, int oldw, int oldh) {
-		if (w == 0 && h == 0) {
+	public void onSizeChanged(final int neww, final int newh, final int oldw, final int oldh) {
+		if (neww == 0 && newh == 0) {
 			return;
 		}
 		Log.i("CalculatorKeyLayout", "RPN.onSizeChanged");
-		int kw = w / 5;
-		int kh = kw;
-		Log.d("CalculatorKeyLayout", "height = " + Integer.toString(h));
-		Log.d("CalculatorKeyLayout", "width = " + Integer.toString(w));
-		Log.d("CalculatorKeyLayout", "kh = " + Integer.toString(kh));
-		Log.d("CalculatorKeyLayout", "kw = " + Integer.toString(kw));
+		final int keyw = neww / 5;
+		final int keyh = keyw;
+		Log.d("CalculatorKeyLayout", "height = " + Integer.toString(newh));
+		Log.d("CalculatorKeyLayout", "width = " + Integer.toString(neww));
+		Log.d("CalculatorKeyLayout", "kh = " + Integer.toString(keyh));
+		Log.d("CalculatorKeyLayout", "kw = " + Integer.toString(keyw));
 		// Work out row padding before we resize all the buttons
-		Button enter = (Button) findViewById(R.id.enter);
-		Button del = (Button) findViewById(R.id.bsp);
-		int padding = enter.getTop() - del.getTop();
+		final Button enter = (Button) findViewById(R.id.enter);
+		final Button del = (Button) findViewById(R.id.bsp);
+		final int padding = enter.getTop() - del.getTop();
 		Log.d("CalculatorKeyLayout", "Padding seems to be" + 
 		    Integer.toString(padding));
 		// Set keys to custom fonts
-		AssetManager assets = this.mycontext.getAssets();
+		final AssetManager assets = this.mycontext.getAssets();
 		// The RPN font is a subset created from Symbola, as found at
 		// http://users.teilar.gr/~g1951d/
 		// It's used to provide the Unicode characters required for the square 
 		// root, reciprocal, delete and raise-to-power keys.
-		Typeface rpnfont = Typeface.createFromAsset(assets, "fonts/RPN.TTF");
+		final Typeface rpnfont = Typeface.createFromAsset(assets, "fonts/RPN.TTF");
 		// Roboto, of course, is Google's new font for Android 4 apps.
-		Typeface roboto = Typeface.createFromAsset(assets, "fonts/Roboto-Light.ttf");
+		final Typeface roboto = 
+		    Typeface.createFromAsset(assets, "fonts/Roboto-Light.ttf");
 		// Now run through all the buttons, resizing them and applying the fonts.
 		for(int i = 0; i < getChildCount(); i++) {
-			Button key = (Button) getChildAt(i);
-			int k = key.getId();
+			final Button key = (Button) getChildAt(i);
+			final int kid = key.getId();
 			// Enter key is the classic double-height key.
-			if (k == R.id.enter) {
-				key.setHeight(kh * 2 + padding);
-			} else if (k != R.id.sqrt && k != R.id.power && k != R.id.swap && 
-			    k != R.id.drop && k != R.id.recip) {
-				key.setHeight(kh);
+			if (kid == R.id.enter) {
+				key.setHeight(keyh * 2 + padding);
+			} else if (kid != R.id.sqrt && kid != R.id.power && kid != R.id.swap && 
+			    kid != R.id.drop && kid != R.id.recip) {
+				key.setHeight(keyh);
 			}
-			key.setWidth(kw);
-			if (k == R.id.bsp || k == R.id.recip || k == R.id.power || 
-			    k == R.id.sqrt) {
+			key.setWidth(keyw);
+			if (kid == R.id.bsp || kid == R.id.recip || kid == R.id.power || 
+			    kid == R.id.sqrt) {
 				key.setTypeface(rpnfont);
 			} else {
 				key.setTypeface(roboto);

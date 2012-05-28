@@ -3,7 +3,7 @@
     package="com.ath0.rpn"
     android:installLocation="auto"
     android:versionCode="12"
-    android:versionName="2.0a1" >
+    android:versionName="2.0b1" >
 
     <uses-sdk
         android:minSdkVersion="14"
