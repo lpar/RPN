@@ -6,6 +6,15 @@ import java.math.BigInteger;
 import java.math.RoundingMode;
 import java.util.Stack;
 
+/**
+ * Model for RPN calculator. 
+ * Implements a stack and a set of typical operations on it.
+ * Some operations can cause arithmetic exceptions; in those cases, a String 
+ * is used to return an error message, and null indicates no error. This
+ * violation of good style allows the calling controller to handle operations 
+ * uniformly with no knowledge of mathematics, and rely on the stack object's
+ * operation method to supply the appropriate error message.
+ */
 public class CalculatorStack implements Serializable {
 
 	/**
@@ -13,17 +22,20 @@ public class CalculatorStack implements Serializable {
 	 */
 	private static final long serialVersionUID = 1L;
 	
-	// Number of characters to preallocate when converting a stack value into a string
-	// or storing input from user.
+	// Number of characters to preallocate when converting a stack value into a 
+	// string or storing input from user.
 	private static final int TYPICAL_LENGTH = 32;
 	// 4x the above
 	private static final int TYPICAL_LENGTH_X4 = 128;
 	
-	// How many digits of precision (decimal places) are used internally in calculations.
+	// How many digits of precision (decimal places) are used internally in 
+	// calculations.
 	private static final int INTERNAL_SCALE = 32;
 
 	private final Stack<BigDecimal> stack;
 
+	// Initial scale is 2 decimal places, as that's the most useful for general 
+	// everyday calculations.
 	private int scale = 2;
 
 	public CalculatorStack() {
@@ -31,19 +43,27 @@ public class CalculatorStack implements Serializable {
 		this.stack = new Stack<BigDecimal>();
 	}
 
+	/**
+	 * Pushes a value onto the stack.
+	 * @param n A valid decimal number, in a String. Usually taken from the 
+	 * InputBuffer.
+	 */
 	public void push(String n) {
 		BigDecimal x = new BigDecimal(n);
 		this.stack.push(x);
 	}
 	
+	/**
+	 * Returns whether the stack is empty.
+	 */
 	public boolean isEmpty() {
 		return this.stack.isEmpty();
 	}
 	
 	/**
-	 * Get the contents of the stack as a string
+	 * Gets the contents of the stack as a string.
 	 * @param levels the number of levels of stack to return
-	 * @return
+	 * @return a text representation of the stack
 	 */
 	public StringBuilder toString(int levels) {
 		final StringBuilder result = new StringBuilder(TYPICAL_LENGTH_X4);
@@ -53,8 +73,6 @@ public class CalculatorStack implements Serializable {
 				result.append('\n');
 			}
 			int j = depth - levels + i;
-	//		result.append(Integer.toString(i + 1));
-	//		result.append(": ");
 			if (j >= 0) {
 				result.append(formatNumber(this.stack.get(j)));
 			}
@@ -62,6 +80,12 @@ public class CalculatorStack implements Serializable {
 		return result;
 	}
 	
+	/**
+	 * Formats a BigDecimal number to a fixed number of decimal places, and adds 
+	 * thousands commas.
+	 * @param x
+	 * @return
+	 */
 	private String formatNumber(final BigDecimal x) {
 		final StringBuilder result = new StringBuilder(TYPICAL_LENGTH);
 		result.append(x.setScale(this.scale, RoundingMode.HALF_UP).toPlainString());
@@ -89,7 +113,9 @@ public class CalculatorStack implements Serializable {
 		return result.toString();
 	}
 	
-	// Changes sign of the input buffer.
+	/**
+	 * Changes the sign of the top number on the stack.
+	 */
 	public void chs() {
 		if (!this.stack.isEmpty()) {
 			BigDecimal x = this.stack.pop();
@@ -97,14 +123,18 @@ public class CalculatorStack implements Serializable {
 		}
 	}
 
-	// Drop top element from stack.
+	/**
+	 * Drops the top element from the stack.
+	 */
 	public void drop() {
 		if (!this.stack.isEmpty()) {
 			this.stack.pop();
 		}
 	}
 	
-	// Dupe top element on stack.
+	/**
+	 * Duplicates the top element on the stack.
+	 */
 	public void dup() {
 		if (!this.stack.isEmpty()) {
 			BigDecimal x = this.stack.peek();
@@ -112,7 +142,9 @@ public class CalculatorStack implements Serializable {
 		}
 	}
 	
-	// Swap top two elements
+  /**
+   * Swaps the top two elements on the stack.
+   */
 	public void swap() {
 		if (this.stack.size() > 1) {
 			BigDecimal x = this.stack.pop();
@@ -122,7 +154,10 @@ public class CalculatorStack implements Serializable {
 		}
 	}
 	
-	// Add top two elements.
+	/**
+	 * Adds together the top two elements on the stack, and replaces them with
+	 * the result.
+	 */
 	public void add() {
 		if (this.stack.size() > 1) {
 			BigDecimal x = this.stack.pop();
@@ -132,7 +167,10 @@ public class CalculatorStack implements Serializable {
 		}
 	}
 	
-	// Add top two elements.
+	/**
+	 * Subtracts the top number on the stack from the number beneath it, and 
+	 * replaces them both with the result.
+	 */
 	public void subtract() {
 		if (this.stack.size() > 1) {
 			BigDecimal x = this.stack.pop();
@@ -142,7 +180,10 @@ public class CalculatorStack implements Serializable {
 		}
 	}
 	
-	// Add top two elements.
+	/**
+	 * Multiplies the top two numbers on the stack together, and replaces them 
+	 * with the result.
+	 */
 	public void multiply() {
 		if (this.stack.size() > 1) {
 			BigDecimal x = this.stack.pop();
@@ -152,7 +193,12 @@ public class CalculatorStack implements Serializable {
 		}
 	}
 	
-	// Raise to power.
+	/**
+	 * Takes the top item on the stack, and uses its integer value as the power
+	 * for raising the number beneath it.
+	 * e.g. before:  X Y  after: X^Y   before: 2 3  after: 8
+	 * @return an error message, or null if there is no error
+	 */
 	// Returns error message, or null if no error.
 	public String power() {
 		String result = null;
@@ -170,28 +216,35 @@ public class CalculatorStack implements Serializable {
 		return result;
 	}
 	
-	// Divide top two elements.
-	// Returns error message, or null if no error.
+	/**
+	 * Uses the top number on the stack to divide the number beneath it.
+	 * Replaces both with the result of the division.
+	 * e.g. before: x y  after: x/y   before:  4 2  after: 2
+   * @return an error message, or null if there is no error
+	 */
 	public String divide() {
 		String result = null;
 		if (this.stack.size() > 1) {
 			BigDecimal x = this.stack.pop();
 			BigDecimal y = this.stack.pop();
-			// We use HALF_EVEN rounding because this statistically minimizes cumulative error
-			// during repeated calculations.
+			// We use HALF_EVEN rounding because this statistically minimizes 
+			// cumulative error during repeated calculations.
 			try {
 				BigDecimal r = y.divide(x, INTERNAL_SCALE,
 						RoundingMode.HALF_EVEN);
 				this.stack.push(r);
 			} catch (ArithmeticException e) {
 				result = e.getMessage();
-	//			Log.i("divide", "Error: " + e.getMessage());
 			}
 		}
 		return result;
 	}
 	
-	// Reciprocal of top element
+	/**
+	 * Computes the reciprocal of the top element on the stack, and replaces it
+	 * with the result.
+	 * @return an error message, or null if there is no error
+	 */
 	public String reciprocal() {
 		String result = null;
 		if (!this.stack.isEmpty()) {
@@ -208,10 +261,19 @@ public class CalculatorStack implements Serializable {
 		return result;
 	}
 	
+	/**
+	 * Sets the display scale, in decimal places.
+	 * Computation is always performed to the INTERNAL_SCALE.
+	 * @param newscale new scale value
+	 */
 	public void setScale(final int newscale) {
 		this.scale = newscale;
 	}
 	
+	/**
+	 * Sets the display scale to the integer value of the top element on the
+	 * stack, as long as that value is less than the INTERNAL_SCALE.
+	 */
 	public void setScale() {
 		if (!this.stack.isEmpty()) {
 			BigDecimal x = this.stack.pop();
@@ -222,10 +284,18 @@ public class CalculatorStack implements Serializable {
 		}
 	}
 
+	/**
+	 * Gets the current display scale.
+	 * @return
+	 */
 	public int getScale() {
 		return this.scale;
 	}
 	
+	/**
+	 * Computes the square root of the value on the top of the stack, and
+	 * replaces that value with the result.
+	 */
 	public void sqrt() {
 		if (!this.stack.isEmpty()) {
 			BigDecimal x = sqrt(this.stack.pop(), INTERNAL_SCALE);
@@ -234,10 +304,10 @@ public class CalculatorStack implements Serializable {
 	}
 	
     /**
-     * Compute the square root of x to a given scale, x >= 0.
+     * Computes the square root of x to a given scale, x >= 0.
      * Use Newton's algorithm.
-     * Taken from "Java Number Cruncher: The Java Programmer's Guide to Numerical Computing"
-     * (Ronald Mak, 2003) http://goo.gl/CXpi2
+     * Taken from "Java Number Cruncher: The Java Programmer's Guide to 
+     * Numerical Computing" (Ronald Mak, 2003) http://goo.gl/CXpi2
      * @param x the value of x
      * @param scale the desired scale of the result
      * @return the result value

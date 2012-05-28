@@ -67,6 +67,8 @@ class Eula {
             builder.setTitle(R.string.eula_title);
             builder.setCancelable(true);
             builder.setPositiveButton(R.string.eula_accept, new DialogInterface.OnClickListener() {
+                @Override
+                @SuppressWarnings("synthetic-access")
                 public void onClick(DialogInterface dialog, int which) {
                     accept(preferences);
                     if (activity instanceof OnEulaAgreedTo) {
@@ -75,11 +77,15 @@ class Eula {
                 }
             });
             builder.setNegativeButton(R.string.eula_refuse, new DialogInterface.OnClickListener() {
+                @Override
+                @SuppressWarnings("synthetic-access")
                 public void onClick(DialogInterface dialog, int which) {
                     refuse(activity);
                 }
             });
             builder.setOnCancelListener(new DialogInterface.OnCancelListener() {
+                @Override
+                @SuppressWarnings("synthetic-access")
                 public void onCancel(DialogInterface dialog) {
                     refuse(activity);
                 }

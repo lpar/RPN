@@ -2,6 +2,9 @@ package com.ath0.rpn;
 
 import java.io.Serializable;
 
+/**
+ * Implements the calculator's input buffer.
+ */
 public class InputBuffer implements Serializable {
 
 	/**
@@ -9,6 +12,7 @@ public class InputBuffer implements Serializable {
 	 */
 	private static final long serialVersionUID = 1L;
 	
+	// A sensible initial capacity that should fit all everyday numbers.
 	private static final int INITIAL_CAPACITY = 32;
 	private final StringBuilder buffer = new StringBuilder(INITIAL_CAPACITY);
 
@@ -22,8 +26,8 @@ public class InputBuffer implements Serializable {
 	}
 	
 	/**
-	 * Appends a given character to the buffer, if the result would be a valid real number.
-	 * If an '.' is appended to an empty buffer, a '0' is added first.
+	 * Appends a given character to the buffer, if the result would be a valid 
+   * real number. If '.' is appended to an empty buffer, a '0' is added first.
 	 * @param c a digit or '.'
 	 */
 	public void append(char c) {
