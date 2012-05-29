@@ -32,7 +32,7 @@ public class CalculatorStack implements Serializable {
 	// calculations.
 	private static final int INTERNAL_SCALE = 32;
 
-	transient private final Stack<BigDecimal> stack;
+	private final Stack<BigDecimal> stack;
 
   // Initial scale is 2 decimal places, as that's the most useful for general 
 	// everyday calculations.
@@ -66,18 +66,20 @@ public class CalculatorStack implements Serializable {
 	 * @return a text representation of the stack
 	 */
 	public StringBuilder toString(final int levels) {
-		final StringBuilder result = new StringBuilder(TYPICAL_LENGTH_X4);
-		final int depth = this.stack.size();
-		for (int i = 0; i < levels; i++) {
-			if (i != 0) {
-				result.append('\n');
-			}
-			final int idx = depth - levels + i;
-			if (idx >= 0) {
-				result.append(formatNumber(this.stack.get(idx)));
-			}
-		}
-		return result;
+	  final StringBuilder result = new StringBuilder(TYPICAL_LENGTH_X4);
+	  if (this.stack != null) {
+	    final int depth = this.stack.size();
+	    for (int i = 0; i < levels; i++) {
+	      if (i != 0) {
+	        result.append('\n');
+	      }
+	      final int idx = depth - levels + i;
+	      if (idx >= 0) {
+	        result.append(formatNumber(this.stack.get(idx)));
+	      }
+	    }
+	  }
+	  return result;
 	}
 	
 	/**

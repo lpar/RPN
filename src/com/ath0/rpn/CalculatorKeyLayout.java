@@ -16,7 +16,7 @@ import android.widget.GridLayout;
  */
 public class CalculatorKeyLayout extends GridLayout {
 
-	private transient final Context mycontext;
+	private final Context mycontext;
 
 	// We make all the constructors store the context, as we need it later on 
 	// to load fonts.

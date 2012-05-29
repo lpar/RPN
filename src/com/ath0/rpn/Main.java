@@ -33,11 +33,11 @@ import android.widget.Toast;
  */
 public class Main extends Activity implements OnKeyListener {
 
-  transient private InputBuffer buffer;
-  transient private CalculatorStack stack;
-  transient private String error;
-  transient private Menu optionsmenu;
-  transient private int screenlines;
+  private InputBuffer buffer;
+  private CalculatorStack stack;
+  private String error;
+  private Menu optionsmenu;
+  private int screenlines;
 
   /**
    * Typical onCreate for an Android app. Shows an EULA, mostly for the

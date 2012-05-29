@@ -16,7 +16,7 @@ public class InputBuffer implements Serializable {
 	
 	// A sensible initial capacity that should fit all everyday numbers.
 	private static final int INITIAL_CAPACITY = 32;
-	transient private final StringBuilder buffer = new StringBuilder(INITIAL_CAPACITY);
+  private final StringBuilder buffer = new StringBuilder(INITIAL_CAPACITY);
 
 	public InputBuffer(final String value) {
 		super();
@@ -85,7 +85,7 @@ public class InputBuffer implements Serializable {
 	 * @return
 	 */
 	public boolean isEmpty() {
-		return this.buffer.length() == 0;
+		return this.buffer != null && this.buffer.length() == 0;
 	}
 	
 	/**
