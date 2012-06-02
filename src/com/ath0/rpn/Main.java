@@ -15,6 +15,7 @@ import android.content.ClipboardManager;
 import android.content.Context;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.ContextMenu;
 import android.view.HapticFeedbackConstants;
 import android.view.KeyEvent;
 import android.view.Menu;
@@ -36,7 +37,6 @@ public class Main extends Activity implements OnKeyListener {
   private InputBuffer buffer;
   private CalculatorStack stack;
   private String error;
-  private Menu optionsmenu;
   private int screenlines;
 
   /**
@@ -83,9 +83,13 @@ public class Main extends Activity implements OnKeyListener {
    */
   @Override
   public boolean onCreateOptionsMenu(final Menu menu) {
-    this.optionsmenu = menu;
+    Log.d("onCreateOptionsMenu", "Options menu inflated");
     final MenuInflater inflater = getMenuInflater();
     inflater.inflate(R.menu.main, menu);
+    // Set the display to have a context menu. This will cause our
+    // onCreateContextMenu method to be called when the display is long pressed
+    final TextView disp = (TextView) findViewById(R.id.Display);
+    registerForContextMenu(disp);
     return true;
   }
 
@@ -415,7 +419,23 @@ public class Main extends Activity implements OnKeyListener {
     }
     return true;
   }
-
+  
+  /**
+   * Prepares the context menu shown by the display. It behaves just like the
+   * options menu.
+   */
+  @Override
+  public void onCreateContextMenu(final ContextMenu menu, final View v, 
+      final ContextMenu.ContextMenuInfo menuInfo) {
+    // Context menu is created each time.
+    // Inflate menu into it.
+    final MenuInflater inflater = getMenuInflater();
+    inflater.inflate(R.menu.main, menu);
+    // Now prepare it like an options menu.
+    onPrepareOptionsMenu(menu);
+    return;
+  }
+  
   /**
    * Prepares the options menu. Checks if the clipboard has text on it, and
    * enables or disables the paste operation accordingly.
@@ -423,20 +443,21 @@ public class Main extends Activity implements OnKeyListener {
   @Override
   public boolean onPrepareOptionsMenu(final Menu menu) {
     Context ctx = this.getBaseContext();
+    MenuItem pasteitem = menu.findItem(android.R.id.paste);
+    // Now check the clipboard and set the menu entry states
     ClipboardManager clipboard = 
         (ClipboardManager) ctx.getSystemService(Context.CLIPBOARD_SERVICE);
-    MenuItem pasteitem = this.optionsmenu.findItem(android.R.id.paste);
     if (clipboard.hasPrimaryClip()) {
       if (clipboard.getPrimaryClipDescription().hasMimeType(
           ClipDescription.MIMETYPE_TEXT_PLAIN)) {
-        Log.d("onPrepareOptionsMenu", "Clipboard is OK");
+        Log.d("setMenuStateForClipboard", "Clipboard is OK");
         pasteitem.setEnabled(true);
       } else {
-        Log.d("onPrepareOptionsMenu", "Clipboard has no plain text");
+        Log.d("setMenuStateForClipboard", "Clipboard has no plain text");
         pasteitem.setEnabled(false);
       }
     } else {
-      Log.d("onPrepareOptionsMenu", "Clipboard is empty");
+      Log.d("setMenuStateForClipboard", "Clipboard is empty");
       pasteitem.setEnabled(false);
     }
     return true;
@@ -459,5 +480,13 @@ public class Main extends Activity implements OnKeyListener {
       result = super.onOptionsItemSelected(item);
     }
     return result;
+  }
+  
+  /**
+   * Handle context menu selection just like options menu selection.
+   */
+  @Override
+  public boolean onContextItemSelected (final MenuItem item) {
+    return onOptionsItemSelected(item);
   }
 }

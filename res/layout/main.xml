@@ -103,7 +103,7 @@
             style="@style/CalculatorButtonSmallStyle"
             android:onClick="clickHandler"
             android:tag="sdp"
-            android:text="DP" />
+            android:text="SET&#x0a;DP" />
 
         <Button
             android:id="@+id/k7"

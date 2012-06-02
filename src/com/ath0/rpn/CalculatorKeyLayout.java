@@ -56,7 +56,7 @@ public class CalculatorKeyLayout extends GridLayout {
 		final Button enter = (Button) findViewById(R.id.enter);
 		final Button del = (Button) findViewById(R.id.bsp);
 		final int padding = enter.getTop() - del.getTop();
-		Log.d("CalculatorKeyLayout", "Padding seems to be" + 
+		Log.d("CalculatorKeyLayout", "Padding seems to be " + 
 		    Integer.toString(padding));
 		// Set keys to custom fonts
 		final AssetManager assets = this.mycontext.getAssets();
