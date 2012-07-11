@@ -16,12 +16,10 @@ import android.content.Context;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.ContextMenu;
-import android.view.HapticFeedbackConstants;
 import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
-import android.view.SoundEffectConstants;
 import android.view.View;
 import android.view.View.OnKeyListener;
 import android.widget.FrameLayout;
@@ -276,9 +274,6 @@ public class Main extends Activity implements OnKeyListener {
       final char c = key.charAt(0);
       keyOther(c);
     }
-    v.performHapticFeedback(HapticFeedbackConstants.VIRTUAL_KEY,
-        HapticFeedbackConstants.FLAG_IGNORE_VIEW_SETTING);
-    v.playSoundEffect(SoundEffectConstants.CLICK);
   }
 
   /**

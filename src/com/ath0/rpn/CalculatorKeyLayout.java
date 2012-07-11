@@ -5,6 +5,10 @@ import android.content.res.AssetManager;
 import android.graphics.Typeface;
 import android.util.AttributeSet;
 import android.util.Log;
+import android.view.HapticFeedbackConstants;
+import android.view.MotionEvent;
+import android.view.View;
+import android.view.View.OnTouchListener;
 import android.widget.Button;
 import android.widget.GridLayout;
 
@@ -14,9 +18,10 @@ import android.widget.GridLayout;
  * horizontally; then makes all but the top row of keys square. Also sets the 
  * keys to custom fonts.
  */
-public class CalculatorKeyLayout extends GridLayout {
+public class CalculatorKeyLayout extends GridLayout implements OnTouchListener {
 
 	private final Context mycontext;
+	private final boolean mayclick = true;
 
 	// We make all the constructors store the context, as we need it later on 
 	// to load fonts.
@@ -35,7 +40,7 @@ public class CalculatorKeyLayout extends GridLayout {
 		super(context, attrs, defStyle);
 		this.mycontext = context;
 	}
-
+	
 	/**
 	 * Catches onSizeChanged events and uses the new size of the layout to 
 	 * compute the key sizes.
@@ -71,6 +76,7 @@ public class CalculatorKeyLayout extends GridLayout {
 		// Now run through all the buttons, resizing them and applying the fonts.
 		for(int i = 0; i < getChildCount(); i++) {
 			final Button key = (Button) getChildAt(i);
+			key.setOnTouchListener(this);
 			final int kid = key.getId();
 			// Enter key is the classic double-height key.
 			if (kid == R.id.enter) {
@@ -88,4 +94,13 @@ public class CalculatorKeyLayout extends GridLayout {
 			}
 		}	
 	}
+
+  @Override
+  public boolean onTouch(final View v, final MotionEvent event) {
+    if (event.getActionMasked() == MotionEvent.ACTION_DOWN) {
+      v.performHapticFeedback(HapticFeedbackConstants.VIRTUAL_KEY,
+          HapticFeedbackConstants.FLAG_IGNORE_VIEW_SETTING);
+    }
+    return false;
+  }
 }
