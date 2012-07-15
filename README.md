@@ -25,7 +25,18 @@ way it is, [my web site has details](http://meta.ath0.com/software/rpn/).
 Source code licensed under the GNU Public License, Version 3 or later.
 Improvements are welcome.
 
-# New in version 2.0
+# Version history
+
+## 2.0.2
+
+* Fixes visual glitches on Jelly Bean (Android 4.1) on Galaxy Nexus.
+
+## 2.0.1
+
+* Fixes double audio feedback on keyboard buttons. 
+* Improves haptic feedback to fire when the key is touched, like the regular on-screen QWERTY keyboard.
+
+## 2.0
 
 * Now requires Android 4 -- use 1.x (commit 199a87f731) if you are stuck with an earlier OS version.
 * Completely reworked Android 4 UI, with Roboto font.

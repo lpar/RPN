@@ -21,7 +21,6 @@ import android.widget.GridLayout;
 public class CalculatorKeyLayout extends GridLayout implements OnTouchListener {
 
 	private final Context mycontext;
-	private final boolean mayclick = true;
 
 	// We make all the constructors store the context, as we need it later on 
 	// to load fonts.
@@ -42,57 +41,67 @@ public class CalculatorKeyLayout extends GridLayout implements OnTouchListener {
 	}
 	
 	/**
-	 * Catches onSizeChanged events and uses the new size of the layout to 
-	 * compute the key sizes.
+	 * Catch the measurement of the keyboard, and use the width we are given to
+	 * fix up the size of the buttons. This used to be in the onSizeChanged event,
+	 * but that caused visual glitching after the speed improvements in
+	 * Android 4.1 started to allow the phone to draw the unresized buttons before
+	 * the resize code had a chance to run. 
 	 */
 	@Override
-	public void onSizeChanged(final int neww, final int newh, final int oldw, final int oldh) {
-		if (neww == 0 && newh == 0) {
-			return;
-		}
-		Log.i("CalculatorKeyLayout", "RPN.onSizeChanged");
-		final int keyw = neww / 5;
-		final int keyh = keyw;
-		Log.d("CalculatorKeyLayout", "height = " + Integer.toString(newh));
-		Log.d("CalculatorKeyLayout", "width = " + Integer.toString(neww));
-		Log.d("CalculatorKeyLayout", "kh = " + Integer.toString(keyh));
-		Log.d("CalculatorKeyLayout", "kw = " + Integer.toString(keyw));
-		// Work out row padding before we resize all the buttons
-		final Button enter = (Button) findViewById(R.id.enter);
-		final Button del = (Button) findViewById(R.id.bsp);
-		final int padding = enter.getTop() - del.getTop();
-		Log.d("CalculatorKeyLayout", "Padding seems to be " + 
-		    Integer.toString(padding));
-		// Set keys to custom fonts
-		final AssetManager assets = this.mycontext.getAssets();
-		// The RPN font is a subset created from Symbola, as found at
-		// http://users.teilar.gr/~g1951d/
-		// It's used to provide the Unicode characters required for the square 
-		// root, reciprocal, delete and raise-to-power keys.
-		final Typeface rpnfont = Typeface.createFromAsset(assets, "fonts/RPN.TTF");
-		// Roboto, of course, is Google's new font for Android 4 apps.
-		final Typeface roboto = 
-		    Typeface.createFromAsset(assets, "fonts/Roboto-Light.ttf");
-		// Now run through all the buttons, resizing them and applying the fonts.
-		for(int i = 0; i < getChildCount(); i++) {
-			final Button key = (Button) getChildAt(i);
-			key.setOnTouchListener(this);
-			final int kid = key.getId();
-			// Enter key is the classic double-height key.
-			if (kid == R.id.enter) {
-				key.setHeight(keyh * 2 + padding);
-			} else if (kid != R.id.sqrt && kid != R.id.power && kid != R.id.swap && 
-			    kid != R.id.drop && kid != R.id.recip) {
-				key.setHeight(keyh);
-			}
-			key.setWidth(keyw);
-			if (kid == R.id.bsp || kid == R.id.recip || kid == R.id.power || 
-			    kid == R.id.sqrt) {
-				key.setTypeface(rpnfont);
-			} else {
-				key.setTypeface(roboto);
-			}
-		}	
+  protected void onMeasure (final int widthMeasureSpec, final int heightMeasureSpec) {
+	  int width = MeasureSpec.getSize(widthMeasureSpec);
+	  int height = MeasureSpec.getSize(heightMeasureSpec);
+	  Log.d("onMeasure", "width = " + width);
+	  Log.d("onMeasure", "height = " + height);
+	  int mode = MeasureSpec.getMode(heightMeasureSpec);
+	  if (mode == MeasureSpec.AT_MOST) {
+	    Log.d("onMeasure", "mode = AT_MOST");
+	  } else if (mode == MeasureSpec.EXACTLY) {
+	    Log.d("onMeasure", "mode = EXACTLY");
+	  } else {
+	    Log.d("onMeasure", "mode = UNSPECIFIED");
+	  }
+	  resizeKeys(width);
+	  super.onMeasure(widthMeasureSpec, heightMeasureSpec);
+	}
+	
+	private void resizeKeys(final int keyboardWidth) {
+	    final int keyw = keyboardWidth / 5;
+	    final int keyh = keyw;
+	    Log.d("resizeKeys", "width = " + Integer.toString(keyboardWidth));
+	    Log.d("resizeKeys", "kh = " + Integer.toString(keyh));
+	    Log.d("resizeKeys", "kw = " + Integer.toString(keyw));
+	    // Work out row padding before we resize all the buttons
+	    // Set keys to custom fonts
+	    final AssetManager assets = this.mycontext.getAssets();
+	    // The RPN font is a subset created from Symbola, as found at
+	    // http://users.teilar.gr/~g1951d/
+	    // It's used to provide the Unicode characters required for the square 
+	    // root, reciprocal, delete and raise-to-power keys.
+	    final Typeface rpnfont = Typeface.createFromAsset(assets, "fonts/RPN.TTF");
+	    // Roboto, of course, is Google's new font for Android 4 apps.
+	    final Typeface roboto = 
+	        Typeface.createFromAsset(assets, "fonts/Roboto-Light.ttf");
+	    // Now run through all the buttons, resizing them and applying the fonts.
+	    for(int i = 0; i < getChildCount(); i++) {
+	      final Button key = (Button) getChildAt(i);
+	      key.setOnTouchListener(this);
+	      final int kid = key.getId();
+	      // Enter key is the classic double-height key.
+	      if (kid == R.id.enter) {
+	        key.setHeight(keyh * 2);
+	      } else if (kid != R.id.sqrt && kid != R.id.power && kid != R.id.swap && 
+	          kid != R.id.drop && kid != R.id.recip) {
+	        key.setHeight(keyh);
+	      }
+	      key.setWidth(keyw);
+	      if (kid == R.id.bsp || kid == R.id.recip || kid == R.id.power || 
+	          kid == R.id.sqrt) {
+	        key.setTypeface(rpnfont);
+	      } else {
+	        key.setTypeface(roboto);
+	      }
+	    }
 	}
 
   @Override
