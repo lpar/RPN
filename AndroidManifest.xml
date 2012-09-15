@@ -2,8 +2,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.ath0.rpn"
     android:installLocation="auto"
-    android:versionCode="16"
-    android:versionName="2.0.2" >
+    android:versionCode="17"
+    android:versionName="2.0.3" >
 
     <uses-sdk
         android:minSdkVersion="14"

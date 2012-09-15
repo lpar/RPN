@@ -5,6 +5,7 @@ import android.content.res.AssetManager;
 import android.graphics.Typeface;
 import android.util.AttributeSet;
 import android.util.Log;
+import android.util.TypedValue;
 import android.view.HapticFeedbackConstants;
 import android.view.MotionEvent;
 import android.view.View;
@@ -100,6 +101,15 @@ public class CalculatorKeyLayout extends GridLayout implements OnTouchListener {
 	        key.setTypeface(rpnfont);
 	      } else {
 	        key.setTypeface(roboto);
+	        // If the user sets font size to "Huge" in system preferences, the
+	        // word "SWAP" becomes too wide to fit on a button; so we manually
+	        // downsize the two top right buttons to size "Large" in that case.
+	        if (kid == R.id.swap || kid == R.id.drop) {
+	          float size = key.getTextSize();
+	          if (size > 32.0) {
+	            key.setTextSize(TypedValue.COMPLEX_UNIT_PX, 32.0f);
+	          }
+	        }
 	      }
 	    }
 	}
