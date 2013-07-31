@@ -266,7 +266,7 @@ public class Main extends Activity implements OnKeyListener {
       updateDisplay();
     } else if ("sqrt".equals(key)) {
       implicitPush();
-      this.stack.sqrt();
+      this.error = this.stack.sqrt();
       updateDisplay();
     } else if ("enter".equals(key)) {
       keyEnter();

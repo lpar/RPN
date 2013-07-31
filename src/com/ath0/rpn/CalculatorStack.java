@@ -6,6 +6,8 @@ import java.math.BigInteger;
 import java.math.RoundingMode;
 import java.util.Stack;
 
+import android.util.Log;
+
 /**
  * Model for RPN calculator. 
  * Implements a stack and a set of typical operations on it.
@@ -204,7 +206,7 @@ public class CalculatorStack implements Serializable {
       this.stack.push(r);
     }
   }
-
+  
   /**
    * Takes the top item on the stack, and uses its integer value as the power
    * for raising the number beneath it.
@@ -218,11 +220,20 @@ public class CalculatorStack implements Serializable {
       BigDecimal y = this.stack.pop();
       BigDecimal x = this.stack.pop();
       try {
-        int yi = y.intValueExact();
-        BigDecimal r = x.pow(yi);
+        BigDecimal r;
+        try {
+          // Try an exact approach first
+          int yi = y.intValueExact();
+          Log.d("power", "Computed power exactly");
+          r = x.pow(yi);
+        } catch (ArithmeticException ex) {
+          // If we can't compute it exactly, compute an approximate value
+          r = approxPow(x,y);
+          Log.d("power", "Computed power approximately");
+        }
         this.stack.push(r);
-      } catch (ArithmeticException e) {
-        result = "Value out of range";
+      } catch (RuntimeException e) {
+        result = e.getMessage();
       }
     }
     return result;
@@ -307,11 +318,18 @@ public class CalculatorStack implements Serializable {
    * Computes the square root of the value on the top of the stack, and
    * replaces that value with the result.
    */
-  public void sqrt() {
+  public String sqrt() {
+    String result = null;
+
     if (!this.stack.isEmpty()) {
-      BigDecimal x = sqrt(this.stack.pop(), INTERNAL_SCALE);
-      this.stack.push(x);
+      try {
+        BigDecimal x = sqrt(this.stack.pop(), INTERNAL_SCALE);
+        this.stack.push(x);
+      } catch (RuntimeException e) {
+        result = e.getMessage();
+      }
     }
+    return result;
   }
 
   /**
@@ -328,6 +346,9 @@ public class CalculatorStack implements Serializable {
     // Check that x >= 0.
     if (x.signum() < 0) {
       throw new IllegalArgumentException("x < 0");
+    }
+    if (x.signum() == 0) {
+      return BigDecimal.ZERO;
     }
 
     // n = x*(10^(2*scale))
@@ -350,6 +371,27 @@ public class CalculatorStack implements Serializable {
     } while (ix.compareTo(ixPrev) != 0);
 
     return new BigDecimal(ix, scale);
+  }
+
+  /**
+   * Compute the power x^y to a the given scale, using doubles.
+   * Loses some precision, but means y can have non integer values.
+   */
+  private static BigDecimal approxPow(final BigDecimal x, final BigDecimal y)
+  {
+    double d;
+
+    // Check that |y| >= 1 for negative x.
+    if (x.signum() < 0 && y.abs().doubleValue() < 1.0) {
+      throw new IllegalArgumentException("|x| < 1");
+    }
+    // Check that y is positive or 0 for x = 0.
+    else if (x.signum() == 0 && y.signum() < 0) {
+      throw new IllegalArgumentException("x < 0");
+    }
+
+    d = Math.pow(x.doubleValue(), y.doubleValue());
+    return new BigDecimal(d);
   }
 
 }
