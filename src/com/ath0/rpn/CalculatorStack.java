@@ -383,11 +383,11 @@ public class CalculatorStack implements Serializable {
 
     // Check that |y| >= 1 for negative x.
     if (x.signum() < 0 && y.abs().doubleValue() < 1.0) {
-      throw new IllegalArgumentException("|x| < 1");
+      throw new IllegalArgumentException("|n| < 1");
     }
     // Check that y is positive or 0 for x = 0.
     else if (x.signum() == 0 && y.signum() < 0) {
-      throw new IllegalArgumentException("x < 0");
+      throw new IllegalArgumentException("n < 0");
     }
 
     d = Math.pow(x.doubleValue(), y.doubleValue());
