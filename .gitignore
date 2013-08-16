@@ -3,3 +3,7 @@ bin
 gen
 releases
 .settings
+local.properties
+build
+.gradle
+.idea
