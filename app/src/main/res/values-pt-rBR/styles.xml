@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+	
+	<style name="CalculatorButtonLargeStyle" parent="@android:style/Widget.Holo.Button">
+		<item name="android:hapticFeedbackEnabled">true</item>
+		<item name="android:textSize">24sp</item>
+		<item name="android:layout_gravity">top|left</item>
+	</style>
+	
+	<style name="CalculatorButtonSmallStyle" parent="@android:style/Widget.Holo.Button.Small">
+	    <item name="android:hapticFeedbackEnabled">true</item>
+	    <item name="android:layout_gravity">top|left</item>
+	</style>
+
+</resources>
