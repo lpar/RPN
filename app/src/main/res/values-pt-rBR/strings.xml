@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+	<string name="app_name">RPN</string>
+	<string name="eula_title">Licença</string>
+	<string name="eula_accept">Aceitar</string>
+	<string name="eula_refuse">Recusar</string>
+</resources>
