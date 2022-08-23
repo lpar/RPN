@@ -1,13 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.ath0.rpn"
-    android:installLocation="auto"
-    android:versionCode="18"
-    android:versionName="2.0.4" >
-
-    <uses-sdk
-        android:minSdkVersion="14"
-        android:targetSdkVersion="18" />
+    xmlns:tools="http://schemas.android.com/tools">
 
     <uses-permission android:name="android.permission.VIBRATE" />
 
@@ -18,7 +11,7 @@
         android:theme="@android:style/Theme" >
         <activity
             android:name=".Main"
-            android:label="@string/app_name"
+            android:exported="true"
             android:screenOrientation="portrait"
             android:theme="@style/Theme.RPN" >
             <intent-filter>

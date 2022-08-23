@@ -445,14 +445,14 @@ public class Main extends Activity implements OnKeyListener {
     if (clipboard.hasPrimaryClip()) {
       if (clipboard.getPrimaryClipDescription().hasMimeType(
           ClipDescription.MIMETYPE_TEXT_PLAIN)) {
-        Log.d("setMenuStateForClipboard", "Clipboard is OK");
+        Log.d("setMenuStateForClipbrd", "Clipboard is OK");
         pasteitem.setEnabled(true);
       } else {
-        Log.d("setMenuStateForClipboard", "Clipboard has no plain text");
+        Log.d("setMenuStateForClipbrd", "Clipboard has no plain text");
         pasteitem.setEnabled(false);
       }
     } else {
-      Log.d("setMenuStateForClipboard", "Clipboard is empty");
+      Log.d("setMenuStateForClipbrd", "Clipboard is empty");
       pasteitem.setEnabled(false);
     }
     return true;

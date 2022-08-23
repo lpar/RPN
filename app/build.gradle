@@ -1,24 +1,24 @@
-apply plugin: 'com.android.application'
+plugins {
+  id 'com.android.application'
+}
 
 android {
-  compileSdkVersion 21
-  buildToolsVersion "21.1.1"
+  compileSdk 32
+  buildToolsVersion '30.0.3'
+  namespace 'com.ath0.rpn'
 
   defaultConfig {
-    applicationId "com.ath0.rpn"
-    minSdkVersion 15
-    targetSdkVersion 21
-    versionCode 1
-    versionName "1.0"
+    applicationId 'com.ath0.rpn'
+    minSdk 15
+    targetSdk 32
+    versionName '2.0.4'
+    versionCode 18
   }
   buildTypes {
     release {
-      runProguard false
-      proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+      minifyEnabled false
+      proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
     }
   }
 }
 
-dependencies {
-  compile fileTree(dir: 'libs', include: ['*.jar'])
-}
